@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://kontaktinfo.difi.no/xsd/kontaktinfo/201210" xmlns:m="http://kontaktinfo.difi.no/xsd/kontaktinfo/metadata/201210"
+	targetNamespace="http://kontaktinfo.difi.no/xsd/kontaktinfo/201210" elementFormDefault="qualified" version="3.0">
+
+	<xs:annotation>
+		<xs:appinfo>Digital kontaktinfo - Webtjeneste </xs:appinfo>
+		<xs:documentation xml:lang="nb">
+			Skjemaet definerer elementer i webtjeneste for Digital kontaktinfo.
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:import namespace="http://kontaktinfo.difi.no/xsd/kontaktinfo/metadata/201210" schemaLocation="kontaktinfo-metadata-201210.xsd" />
+
+	<xs:element name="hentKontaktinfoRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="foedselsnummer" minOccurs="1" maxOccurs="1" type="m:Foedselsnummer" />
+				<xs:element name="tjenesteeierId" minOccurs="1" maxOccurs="1" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="hentKontaktinfolisteRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="foedselsnummer" minOccurs="1" maxOccurs="1000" type="m:Foedselsnummer" />
+				<xs:element name="tjenesteeierId" minOccurs="1" maxOccurs="1" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="hentKontaktinfoResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="kontaktinfo" type="m:Kontaktinfo" minOccurs="0" maxOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="hentKontaktinfolisteResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="kontaktinfo" type="m:Kontaktinfo" minOccurs="1" maxOccurs="1000" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>
