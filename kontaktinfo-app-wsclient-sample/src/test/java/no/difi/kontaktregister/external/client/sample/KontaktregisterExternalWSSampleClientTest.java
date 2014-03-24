@@ -44,7 +44,8 @@ public class KontaktregisterExternalWSSampleClientTest {
     public static void beforeClass() throws MalformedURLException {
         String serviceAddress = System.getProperty("kontaktinfo.address.location");
         if(serviceAddress == null) {
-        	serviceAddress = "https://kontaktinfo-systest.dmz.local/kontaktinfo-external/ws-v3/";
+        	serviceAddress = "https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v3";
+//        	serviceAddress = "https://kontaktinfo-systest.dmz.local/kontaktinfo-external/ws-v3/";
         	System.out.println("kontaktinfo.address.location not set - using " +serviceAddress+" as default");
         }
 

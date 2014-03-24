@@ -1,5 +1,8 @@
 package no.difi.kontaktinfo.external.client.cxf;
 
+import org.apache.cxf.binding.soap.SoapMessage;
+import org.apache.cxf.interceptor.Fault;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.apache.ws.security.handler.WSHandlerConstants;
@@ -32,6 +35,7 @@ public class WSS4JInterceptorHelper {
         inProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallbackHandler.class.getName());
         inProps.put(WSHandlerConstants.SIG_PROP_FILE, "server_sec.properties");
         inProps.put(WSHandlerConstants.DEC_PROP_FILE, "client_sec.properties");
+        
 
         wss4JInInterceptor = new WSS4JInInterceptor(inProps);
         wss4JOutInterceptor = new WSS4JOutInterceptor(outProps);
@@ -45,6 +49,7 @@ public class WSS4JInterceptorHelper {
      */
     public static void addWSS4JInterceptors(org.apache.cxf.interceptor.InterceptorProvider interceptorProvider) {
         interceptorProvider.getInInterceptors().add(wss4JInInterceptor);
+        interceptorProvider.getInInterceptors().add(new LoggingInInterceptor());
         interceptorProvider.getOutInterceptors().add(wss4JOutInterceptor);
     }
 }

@@ -35,8 +35,9 @@ public class KontaktinfoExternalWSSampleClientTest {
     	// Get the service address - for production this is https://kontaktinfo-ws.difi.no/kontaktinfo-external/ws
         String serviceAddress = System.getProperty("kontaktinfo.address.location");
         if(serviceAddress == null) {
-        	serviceAddress = "https://kontaktinfo-systest.dmz.local/kontaktinfo-external/ws";
-            System.out.println("kontaktinfo.address.location not set - using https://kontaktinfo-systest.dmz.local/kontaktinfo-external/ws as default");
+        	serviceAddress = "https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws";
+//        	serviceAddress = "https://kontaktinfo-systest.dmz.local/kontaktinfo-external/ws";
+            System.out.println("kontaktinfo.address.location not set - using " + serviceAddress + " as default");
         }
 
         JaxWsProxyFactoryBean jaxWsProxyFactoryBean = new JaxWsProxyFactoryBean();
