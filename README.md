@@ -5,7 +5,8 @@ For informasjon om kontakt- og reservasjonsregisteret og tilhørende oppslagstje
 
 
 Forløpig er følgende tilgjengelig:
-- Testklient for Oppslagstjenesten er eksempelkode som lar en hente ut brukerinformasjon fra Oppslagstjenesten.
+- Java-Testklient for Oppslagstjenesten, eksempelkode som lar en hente ut brukerinformasjon fra Oppslagstjenesten.
+- SoapUI prosjekt for test av Oppslagstjenesten
 
 Planlagt publisert:
 - Referanseklient for dekryptering og behandling av filuttrekk av kontakt- og reservasjonsregisteret
