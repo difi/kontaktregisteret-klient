@@ -1,4 +1,4 @@
-package no.difi.kontaktinfo.external.client.sample;
+package no.difi.kontaktregister.external.client.v1.sample;
 
 import no.difi.kontaktinfo.external.client.cxf.WSS4JInterceptorHelper;
 import no.difi.kontaktinfo.external.client.v1.generated.*;
@@ -11,18 +11,17 @@ import org.apache.cxf.transport.http.HTTPConduit;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.net.MalformedURLException;
 import java.util.Arrays;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
 /**
- * Sample client tests to demonstrate how to set up and use the Kontaktinfo External Web Service.
+ * Sample client tests to demonstrate how to set up and use: Kontaktinfo webservice v1 / Oppslagstjenesten for kontaktregisteret v1.
  *
- * @see <a href="https://kontaktinfo-ws.difi.no/kontaktinfo-external/dok/v1">https://kontaktinfo-ws.difi.no/kontaktinfo-external/dok/v1</a>
+ * @see <a href="http://begrep.difi.no/Oppslagstjenesten/">http://begrep.difi.no/Oppslagstjenesten/</a>
  */
-public class KontaktinfoExternalWSSampleClientTest {
+public class KontaktregisterExternalWSSampleClientV1Test {
 
     private static KontaktinfoV10 kontaktinfoPort;
     
@@ -31,30 +30,32 @@ public class KontaktinfoExternalWSSampleClientTest {
     private static final String TEST_SERVICE_OWNER = "testsp-dig";
 
     @BeforeClass
-    public static void beforeClass() throws MalformedURLException {
-    	// Get the service address - for production this is https://kontaktinfo-ws.difi.no/kontaktinfo-external/ws
+    public static void beforeClass() {
+    	// Optionally set system property "kontaktinfo.address.location" to override the default test endpoint
         String serviceAddress = System.getProperty("kontaktinfo.address.location");
         if(serviceAddress == null) {
         	serviceAddress = "https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws";
-//        	serviceAddress = "https://kontaktinfo-systest.dmz.local/kontaktinfo-external/ws";
-            System.out.println("kontaktinfo.address.location not set - using " + serviceAddress + " as default");
         }
 
+        // Enables running against alternative endpoints to the one specified in the WSDL
         JaxWsProxyFactoryBean jaxWsProxyFactoryBean = new JaxWsProxyFactoryBean();
         jaxWsProxyFactoryBean.setServiceClass(KontaktinfoV10.class);
         jaxWsProxyFactoryBean.setAddress(serviceAddress);
 
-        // Configure WS Security
+        // Configures WS-Security
         WSS4JInterceptorHelper.addWSS4JInterceptors(jaxWsProxyFactoryBean);
         kontaktinfoPort = (KontaktinfoV10) jaxWsProxyFactoryBean.create();
         
-        // Disables SSL certificate revocation and certificate common name check
-        Client client = ClientProxy.getClient(kontaktinfoPort);
-        HTTPConduit httpConduit = (HTTPConduit) client.getConduit();
-        TLSClientParameters tlsClientParameters = new TLSClientParameters();
-        tlsClientParameters.setDisableCNCheck(true);
-        httpConduit.setTlsClientParameters(tlsClientParameters);
-        System.setProperty("com.sun.net.ssl.checkRevocation", "false");
+        // Optionally set system property "kontaktinfo.ssl.disable" to disable SSL checks to enable running tests against endpoint with invalid SSL setup
+        String disableSslChecks = System.getProperty("kontaktinfo.ssl.disable");
+        if (disableSslChecks != null && disableSslChecks.equalsIgnoreCase("true")) {
+            Client client = ClientProxy.getClient(kontaktinfoPort);
+            HTTPConduit httpConduit = (HTTPConduit) client.getConduit();
+            TLSClientParameters tlsClientParameters = new TLSClientParameters();
+            tlsClientParameters.setDisableCNCheck(true);
+            httpConduit.setTlsClientParameters(tlsClientParameters);
+            System.setProperty("com.sun.net.ssl.checkRevocation", "false");
+        }
     }
 
     @Test
@@ -63,7 +64,6 @@ public class KontaktinfoExternalWSSampleClientTest {
         request.setFoedselsnummer(TEST_SSN_1);
         request.setTjenesteeierId(TEST_SERVICE_OWNER);
         HentKontaktinfoResponse response = kontaktinfoPort.hentKontaktinfo(request);
-
         assertNotNull(response);
         assertEquals(TEST_SSN_1, response.getKontaktinfo().getFoedselsnummer());
     }
@@ -73,12 +73,11 @@ public class KontaktinfoExternalWSSampleClientTest {
         HentKontaktinfolisteRequest request = new HentKontaktinfolisteRequest();
         request.getFoedselsnummer().addAll(Arrays.asList(TEST_SSN_1, TEST_SSN_2));
         request.setTjenesteeierId(TEST_SERVICE_OWNER);
-
         HentKontaktinfolisteResponse response = kontaktinfoPort.hentKontaktinfoliste(request);
-
         assertNotNull(response);
         assertEquals(2, response.getKontaktinfo().size());
         assertEquals(TEST_SSN_1, response.getKontaktinfo().get(0).getFoedselsnummer());
-        assertEquals(TEST_SSN_2, response.getKontaktinfo().get(1).getFoedselsnummer());
+        assertEquals(TEST_SSN_2, response.getKontaktinfo().get(1).getFoedselsnummer());        
     }
+    
 }
