@@ -1,0 +1,28 @@
+---
+layout: default
+title: Oppslagstjensten for kontakt- og reservasjonsregisteret
+headtitle: Oppslagstjensten for kontakt- og reservasjonsregisteret - 
+---
+
+h2. Referanseimplementasjoner for brukere av kontakt- og reservasjonsregisteret i offentlig sektor.
+
+
+For informasjon om kontakt- og reservasjonsregisteret og tilhørende oppslagstjeneste se: 
+- http://begrep.difi.no/Oppslagstjenesten/
+
+
+h3. Forløpig er følgende tilgjengelig:
+
+- Java-Testklient for Oppslagstjenesten, eksempelkode som lar en hente ut brukerinformasjon fra Oppslagstjenesten.
+- SoapUI prosjekt for test av Oppslagstjenesten
+
+h3. Planlagt publisert:
+
+- Referanseklient for dekryptering og behandling av filuttrekk av kontakt- og reservasjonsregisteret
+
+h2. BRUK AV PROSJEKTET
+
+- Alle offentlige virksomheter og leverandører til offentlige virksomheter er velkomne til å bruke prosjektet i forbindelse med sin integrasjon mot Oppslagstjenesten
+- Alle brukere av referanseimplementasjonen er oppfordrer og dele eventuelle tilpassninger eller endringer de gjør i referanseimplementsjonen.
+- Spørsmål, kommentarer eller annet kan sendes inn som Issues her: https://github.com/difi/kontaktregisteret-klient/issues/new
+
