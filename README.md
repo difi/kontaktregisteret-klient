@@ -8,6 +8,5 @@ Forløpig er følgende tilgjengelig:
 - Testklient for Oppslagstjenesten er eksempelkode som lar en hente ut brukerinformasjon fra Oppslagstjenesten.
 
 Planlagt publisert:
-- SoapUI prosjekt for testing av oppslagstjensten
 - Referanseklient for dekryptering og behandling av filuttrekk av kontakt- og reservasjonsregisteret
 
