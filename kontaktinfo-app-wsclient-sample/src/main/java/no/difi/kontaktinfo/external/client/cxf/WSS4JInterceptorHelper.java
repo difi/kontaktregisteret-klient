@@ -3,6 +3,7 @@ package no.difi.kontaktinfo.external.client.cxf;
 import org.apache.cxf.binding.soap.SoapMessage;
 import org.apache.cxf.interceptor.Fault;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.apache.ws.security.handler.WSHandlerConstants;
@@ -51,5 +52,6 @@ public class WSS4JInterceptorHelper {
         interceptorProvider.getInInterceptors().add(wss4JInInterceptor);
         interceptorProvider.getInInterceptors().add(new LoggingInInterceptor());
         interceptorProvider.getOutInterceptors().add(wss4JOutInterceptor);
+        interceptorProvider.getOutInterceptors().add(new LoggingOutInterceptor());
     }
 }

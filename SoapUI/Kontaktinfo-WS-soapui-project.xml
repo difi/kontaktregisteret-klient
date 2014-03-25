@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/14-05">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:HentPersonerForespoersel>
+         <!--1 or more repetitions:-->
+         <ns:informasjonsbehov>Kontaktinfo</ns:informasjonsbehov>
+         <!--1 to 1000 repetitions:-->
+         <ns:personidentifikator>01010317467</ns:personidentifikator>
+          <ns:personidentifikator>01010750160</ns:personidentifikator>
+      </ns:HentPersonerForespoersel>
+   </soapenv:Body>
+</soapenv:Envelope>
