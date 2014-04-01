@@ -1,11 +1,15 @@
 package no.difi.oppslagstjenesten.jmeter;
 
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import no.difi.begrep.Kontaktinformasjon;
+import no.difi.begrep.Person;
 import no.difi.kontaktinfo.external.client.cxf.WSS4JInterceptorHelper;
 import no.difi.kontaktinfo.wsdl.oppslagstjeneste_14_05.Oppslagstjeneste1405;
 import no.difi.kontaktinfo.xsd.oppslagstjeneste._14_05.HentPersonerForespoersel;
 import no.difi.kontaktinfo.xsd.oppslagstjeneste._14_05.HentPersonerRespons;
+import no.difi.kontaktinfo.xsd.oppslagstjeneste._14_05.Informasjonsbehov;
 import org.apache.cxf.configuration.jsse.TLSClientParameters;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
@@ -17,6 +21,11 @@ import org.apache.jmeter.samplers.SampleResult;
 import org.apache.jmeter.testbeans.TestBean;
 import org.apache.jorphan.logging.LoggingManager;
 import org.apache.log.Logger;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -45,12 +54,25 @@ public class KontaktRegisterSampler extends AbstractSampler implements TestBean 
 
     private String sendSoapMsg(String uri, String msg) {
         try{
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode list = mapper.readTree(msg);
 
-            String[] data = msg.split(",");
             String serviceAddress =uri;
-            String ssn = data[0];
-            boolean skip = data[1].equals("true");
-            boolean reservation = data[2].equals("true");
+
+            HashMap<String, List<Boolean>> map = new HashMap<String, List<Boolean>>();
+            Iterator<JsonNode> it = list.iterator();
+
+            while(it.hasNext())
+            {
+                JsonNode line = it.next();
+                String ssn = line.get(0).asText();
+                boolean skip = intToBool(line.get(1).asInt());
+                boolean hasPostbox = intToBool(line.get(2).asInt());
+
+                map.put(ssn, Arrays.asList(skip, hasPostbox));
+            }
+
+
 
             JaxWsProxyFactoryBean jaxWsProxyFactoryBean = new JaxWsProxyFactoryBean();
             jaxWsProxyFactoryBean.setServiceClass(Oppslagstjeneste1405.class);
@@ -70,37 +92,54 @@ public class KontaktRegisterSampler extends AbstractSampler implements TestBean 
             System.setProperty("com.sun.net.ssl.checkRevocation", "false");
 
             HentPersonerForespoersel request = new HentPersonerForespoersel();
-            request.getPersonidentifikator().add(ssn);
-            request.getPersonidentifikator().add("Kontaktinfo");
+            request.getPersonidentifikator().addAll(map.keySet());
+            request.getInformasjonsbehov().add(Informasjonsbehov.SIKKER_DIGITAL_POST);
 
 
-            if(skip){
-                HentPersonerRespons response = kontaktinfoPort.hentPersoner(request);
-                Kontaktinformasjon personsKontaktinfo = response.getPerson().get(0).getKontaktinformasjon();
-                if(personsKontaktinfo.getEpostadresse() == null)
-                    return "ok";
-                else
-                    return "error user should be nonexistent email is " + personsKontaktinfo.getEpostadresse();
-            }else{
-                HentPersonerRespons response = kontaktinfoPort.hentPersoner(request);
-                Kontaktinformasjon kontaktinformasjon = response.getPerson().get(0).getKontaktinformasjon();
-                if(kontaktinformasjon.getEpostadresse() != null && kontaktinformasjon.getEpostadresse().getValue().startsWith(ssn)){
-                    if(reservation){
-                        if(response.getPerson().get(0).getReservasjon().value().equals("JA"))
-                            return "ok";
-                        else
-                            return "error wrong length or wrong type reservation";
+
+            HentPersonerRespons response = kontaktinfoPort.hentPersoner(request);
+
+            for(Person person : response.getPerson()){
+
+                List<Boolean> booleans = map.get(person.getPersonidentifikator());
+                boolean skip = booleans.get(0);
+                boolean hasPostbox = booleans.get(1);
+
+                if(skip){
+                    Kontaktinformasjon personsKontaktinfo = person.getKontaktinformasjon();
+                    if(personsKontaktinfo == null)
+                        ;
+                    else
+                        return "error user should be nonexistent email is " + personsKontaktinfo.getEpostadresse();
+                }else{
+                    Kontaktinformasjon kontaktinformasjon = person.getKontaktinformasjon();
+                    if(kontaktinformasjon != null && kontaktinformasjon.getEpostadresse() != null && kontaktinformasjon.getEpostadresse().getValue().startsWith(person.getPersonidentifikator())){
+                        if(hasPostbox){
+                            if(person.getSikkerDigitalPostAdresse() != null && person.getSikkerDigitalPostAdresse().getPostkasseadresse() != null)
+                                ;
+                            else
+                                return "error could not get SDP " + person.getPersonidentifikator();
+                        }else
+                            ;
+
                     }else
-                        return "ok";
-
-                }else
-                    return "error wrong or missing email";
+                        return "error wrong or missing email " + person.getPersonidentifikator();
+                }
             }
 
         }catch(Throwable e){
             e.printStackTrace();
             return "exception " + e.getMessage() + "\n" + e.toString();
         }
+
+        return "ok";
+    }
+
+    private boolean intToBool(int i) {
+        if(i == 0)
+            return false;
+        else
+            return true;
     }
 
 

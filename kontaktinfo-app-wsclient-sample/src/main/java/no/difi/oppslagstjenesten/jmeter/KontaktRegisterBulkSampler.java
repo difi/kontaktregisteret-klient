@@ -40,7 +40,6 @@ public class KontaktRegisterBulkSampler extends AbstractSampler implements TestB
     private transient String data;
 
     private static Oppslagstjeneste1405 kontaktinfoPort;
-    private static final String TEST_SSN_1 = "02018090573";
 
     private String sendSoapMsg(String uri, String msg) {
         try{
