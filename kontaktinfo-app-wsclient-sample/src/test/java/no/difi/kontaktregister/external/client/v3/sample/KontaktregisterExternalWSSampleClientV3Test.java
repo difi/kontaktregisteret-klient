@@ -4,13 +4,8 @@ import no.difi.kontaktinfo.external.client.cxf.WSS4JInterceptorHelper;
 
 
 import no.difi.kontaktinfo.wsdl.oppslagstjeneste_14_05.Oppslagstjeneste1405;
-import no.difi.kontaktinfo.xsd.oppslagstjeneste._14_05.HentEndringerForespoersel;
-import no.difi.kontaktinfo.xsd.oppslagstjeneste._14_05.HentEndringerRespons;
-import no.difi.kontaktinfo.xsd.oppslagstjeneste._14_05.HentPersonerForespoersel;
-import no.difi.kontaktinfo.xsd.oppslagstjeneste._14_05.HentPersonerRespons;
-import no.difi.kontaktinfo.xsd.oppslagstjeneste._14_05.HentPrintSertifikatForespoersel;
-import no.difi.kontaktinfo.xsd.oppslagstjeneste._14_05.HentPrintSertifikatRespons;
-import no.difi.kontaktinfo.xsd.oppslagstjeneste._14_05.Informasjonsbehov;
+
+import no.difi.kontaktinfo.xsd.oppslagstjeneste._14_05.*;
 
 import org.apache.cxf.configuration.jsse.TLSClientParameters;
 import org.apache.cxf.endpoint.Client;
@@ -71,10 +66,10 @@ public class KontaktregisterExternalWSSampleClientV3Test {
     public void testHentKontaktSertifikat() {
     	HentPrintSertifikatForespoersel print = new HentPrintSertifikatForespoersel(); 
     	HentPrintSertifikatRespons response = kontaktinfoPort.hentPrintSertifikat(print);
-    	assertTrue(response.getPostkasseleverandorAdresse().length() > 0);
-    	assertTrue(response.getX509Certificate().length() > 0);
+    	assertTrue(response.getPostkasseleverandoerAdresse().length() > 0);
+    	assertTrue(response.getX509Sertifikat().length > 0);
     }
-    
+
     @Test
     public void testHentKontaktinfo(){
     	HentPersonerForespoersel personas = new HentPersonerForespoersel();
@@ -85,7 +80,7 @@ public class KontaktregisterExternalWSSampleClientV3Test {
     	assertEquals(TEST_SSN_1, personasResponse.getPerson().get(0).getPersonidentifikator());
     	assertEquals(TEST_SSN_2, personasResponse.getPerson().get(1).getPersonidentifikator());
     }
-    
+
     @Test
     public void testHentEndringer(){
     	HentEndringerForespoersel endringerForespoersel = new HentEndringerForespoersel();
@@ -94,4 +89,5 @@ public class KontaktregisterExternalWSSampleClientV3Test {
     	HentEndringerRespons endringerRespons = kontaktinfoPort.hentEndringer(endringerForespoersel);
     	assertNotNull(endringerRespons);
     }
+
 }

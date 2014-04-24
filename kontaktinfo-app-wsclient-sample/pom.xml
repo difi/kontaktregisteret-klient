@@ -67,10 +67,9 @@
 							</sourceRoot>
 							<wsdlOptions>
 								<wsdlOption>
-									<wsdl>
-										${basedir}/src/main/resources/wsdl/v3/oppslagstjeneste-ws-14-05.wsdl
+                                    <wsdl>
+                                        http://begrep.difi.no/Oppslagstjenesten/xsd/oppslagstjeneste-ws-14-05.wsdl
 									</wsdl>
-									<wsdlLocation>classpath:/wsdl/v3/oppslagstjeneste-ws-14-05.wsdl</wsdlLocation>
 								</wsdlOption>
 							</wsdlOptions>
 						</configuration>
