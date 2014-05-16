@@ -1,0 +1,42 @@
+Innstallasjonsguide for testklient for oppslagstjenesten eksport
+Utgave 1, 16.05.2014
+
+Introduksjon
+Testklient for oppslagstjenesten eksport er eksempelkode som viser hvordan filer hentet fra tjenestens SFTP-server kan
+verifisereres og dekrypteres.  Eksempelet viser ikke hvordan filer hentes fra SFTP-serveren.  Eksempelet viser ikke
+hvordan den dekrypterte XML-filen parses.
+
+Dokumentasjon om tjenesten finnes på http://begrep.difi.no/Oppslagstjenesten/
+
+Eksempelprogrammet viser:
+* hvordan Difis sertifikat brukes til å verifisere signaturen på den krypterte datafila
+* hvordan tjenesteiers privatnøkkel brukes for å dekryptere den symmetriske nøkkelen
+* hvordan den symmetriske nøkkelen brukes for å dekryptere datafila
+Resultatet er en gzipp'et datafil med data fra kontaktregisteret.
+
+
+Nødvendige forutsetninger
+* Tjenesteeier må ha utvekslet sertifikater med Difi for tilgang til tjenesten.
+* Følgende programvare må være installert:
+  - Maven
+  - Git
+  - BouncyCastle - https://www.bouncycastle.org
+  - JCE unlimited strength policies - http://www.oracle.com/technetwork/java/javase/downloads/jce-6-download-429243.html
+
+
+Installasjon
+Last ned prosjektet, og åpne i valgfri IDE. Kjør følgende kommando: "mvn clean install".
+
+For å kjøre programmet, må følgende være tilgjengelig:
+
+* En JKS keystore med:
+  - tjenesteeiers privatnøkkel
+  - Difis sertifikat for eksportjenesten
+
+ * Filer fra Oppslagstjenesten eksport SFTP-område:
+   - kryptert og signert fil med data
+   - signaturfil
+   - symmetrisk nøkkel kryptert for tjenesteeier
+
+Programmet kan kjøres fra kommandolinje:
+java -jar  oppslagstjenesten-export-client-sample-14-05.jar <keystore-file> <keystore-password> <service-owner-key-alias> <service-owner-key-password> <difi-key-alias> <input-encrypted-file> <signature-file> <encrypted-key-file> <output-decrypted-file>
