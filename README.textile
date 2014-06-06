@@ -17,9 +17,6 @@ h3. Forløpig er følgende tilgjengelig:
 - SoapUI prosjekt for test av Oppslagstjenesten
 - Java-kode for dekryptering av filer for Oppslagstjenesten eksport
 
-h3. Planlagt publisert:
-
-- Referanseklient for dekryptering og behandling av filuttrekk av kontakt- og reservasjonsregisteret
 
 h2. BRUK AV PROSJEKTET
 
