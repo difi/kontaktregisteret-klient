@@ -18,6 +18,8 @@ public class WSS4JInterceptorHelper {
 
     private static final WSS4JInInterceptor wss4JInInterceptor;
     private static final WSS4JOutInterceptor wss4JOutInterceptor;
+    private static final WSS4JOutInterceptor wss4JOutInterceptorV310;
+
 
     static {
         final Map<String, Object> outProps = new HashMap<String, Object>();
@@ -29,6 +31,14 @@ public class WSS4JInterceptorHelper {
         outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallbackHandler.class.getName());
         outProps.put(WSHandlerConstants.SIG_PROP_FILE, "client_sec.properties");
 
+        HashMap<String, Object> outPropsV310 = new HashMap<String, Object>(outProps);
+        outPropsV310.put(WSHandlerConstants.SIGNATURE_PARTS, "{}{http://schemas.xmlsoap.org/soap/envelope/}Body ;" +
+                "{}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd} Timestamp");
+
+        wss4JOutInterceptorV310 = new WSS4JOutInterceptor(outPropsV310);
+
+
+
         // for incoming messages: Signature and Timestamp validation. Response is Encrypted
         inProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE + " " + WSHandlerConstants.TIMESTAMP + " " + WSHandlerConstants.ENCRYPT);
         inProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallbackHandler.class.getName());
@@ -37,17 +47,21 @@ public class WSS4JInterceptorHelper {
         
         wss4JInInterceptor = new WSS4JInInterceptor(inProps);
         wss4JOutInterceptor = new WSS4JOutInterceptor(outProps);
+
     }
 
-    /**
-     * Adds the required WSS4J interceptors to the given provider.
-     *
-     * @param interceptorProvider the provider to configure.
-     */
+
     public static void addWSS4JInterceptors(InterceptorProvider interceptorProvider) {
         interceptorProvider.getInInterceptors().add(wss4JInInterceptor);
         interceptorProvider.getInInterceptors().add(new LoggingInInterceptor());
         interceptorProvider.getOutInterceptors().add(wss4JOutInterceptor);
+        interceptorProvider.getOutInterceptors().add(new LoggingOutInterceptor());
+    }
+
+    public static void addWSS4JInterceptorsV310(InterceptorProvider interceptorProvider) {
+        interceptorProvider.getInInterceptors().add(wss4JInInterceptor);
+        interceptorProvider.getInInterceptors().add(new LoggingInInterceptor());
+        interceptorProvider.getOutInterceptors().add(wss4JOutInterceptorV310);
         interceptorProvider.getOutInterceptors().add(new LoggingOutInterceptor());
     }
 }
