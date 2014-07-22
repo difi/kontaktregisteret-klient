@@ -21,7 +21,10 @@ Nødvendige forutsetninger
   - Maven
   - Git
   - BouncyCastle - https://www.bouncycastle.org
+    - Merk at bouncycastle må installers i java sitt hjemmeområdet, følg de 3 siste paragrafer i 5.1 nøye. https://www.bouncycastle.org/specifications.html
   - JCE unlimited strength policies - http://www.oracle.com/technetwork/java/javase/downloads/jce-6-download-429243.html
+
+
 
 
 Installasjon
