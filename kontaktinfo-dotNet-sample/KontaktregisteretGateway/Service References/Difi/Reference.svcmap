@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3e8bba51-af03-4226-acd0-ccbdc9d12633" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://begrep.difi.no/Oppslagstjenesten/xsd/oppslagstjeneste-ws-14-05.wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="oppslagstjeneste-metadata-14-05.xsd" MetadataType="Schema" ID="b1e27a71-34d6-448a-9de7-41a307cfbbdc" SourceId="1" SourceUrl="http://begrep.difi.no/Oppslagstjenesten/xsd/oppslagstjeneste-metadata-14-05.xsd" />
+    <MetadataFile FileName="kontaktinfo-oppslagstjeneste-14-05.wsdl" MetadataType="Wsdl" ID="b8091754-cb80-456d-a346-3c976e9f6b10" SourceId="1" SourceUrl="http://begrep.difi.no/Oppslagstjenesten/xsd/oppslagstjeneste-ws-14-05.wsdl" />
+    <MetadataFile FileName="oppslagstjeneste-ws-14-05.xsd" MetadataType="Schema" ID="a9983ba6-9b15-4ff9-99d9-da29a3894c04" SourceId="1" SourceUrl="http://begrep.difi.no/Oppslagstjenesten/xsd/oppslagstjeneste-ws-14-05.xsd" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

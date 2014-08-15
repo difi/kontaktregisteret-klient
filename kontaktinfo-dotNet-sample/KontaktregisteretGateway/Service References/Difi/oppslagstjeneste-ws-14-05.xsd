@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:sawsdl="http://www.w3.org/ns/sawsdl" xmlns:tns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/14-05" xmlns:m="http://begrep.difi.no" elementFormDefault="qualified" targetNamespace="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/14-05" version="3.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="oppslagstjeneste-metadata-14-05.xsd" namespace="http://begrep.difi.no" />
+  <xs:annotation>
+    <xs:appinfo>Oppslagstjenesten - Webtjeneste</xs:appinfo>
+    <xs:documentation xml:lang="nb">
+            Skjemaet definerer elementer i webtjeneste for Oppslagstjenesten Digitalt kontakt- og reservasjonsregister.
+        </xs:documentation>
+  </xs:annotation>
+  <xs:element sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/HentPersonerForespoersel.html" name="HentPersonerForespoersel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="informasjonsbehov" type="tns:informasjonsbehov" />
+        <xs:element minOccurs="1" maxOccurs="1000" name="personidentifikator" type="m:personidentifikator" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/HentPersonerRespons.html" name="HentPersonerRespons">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1000" ref="m:Person" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/HentEndringerForespoersel.html" name="HentEndringerForespoersel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="informasjonsbehov" type="tns:informasjonsbehov" />
+      </xs:sequence>
+      <xs:attribute name="fraEndringsNummer" type="tns:fraEndringsNummer" use="required" />
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType sawsdl:modelReference="http://begrep.difi.no/Felles/fraEndringsNummer.html" name="fraEndringsNummer">
+    <xs:restriction base="xs:long" />
+  </xs:simpleType>
+  <xs:simpleType sawsdl:modelReference="http://begrep.difi.no/Felles/tilEndringsNummer.html" name="tilEndringsNummer">
+    <xs:restriction base="xs:long" />
+  </xs:simpleType>
+  <xs:simpleType sawsdl:modelReference="http://begrep.difi.no/Felles/senesteEndringsNummer.html" name="senesteEndringsNummer">
+    <xs:restriction base="xs:long" />
+  </xs:simpleType>
+  <xs:element sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/HentEndringerRespons.html" name="HentEndringerRespons">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1000" ref="m:Person" />
+      </xs:sequence>
+      <xs:attribute name="fraEndringsNummer" type="tns:fraEndringsNummer" use="required" />
+      <xs:attribute name="tilEndringsNummer" type="tns:tilEndringsNummer" use="required" />
+      <xs:attribute name="senesteEndringsNummer" type="tns:senesteEndringsNummer" use="required" />
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType sawsdl:modelReference="http://begrep.difi.no/Felles/informasjonsbehov.html" name="informasjonsbehov">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Person" />
+      <xs:enumeration value="Kontaktinfo" />
+      <xs:enumeration value="Sertifikat" />
+      <xs:enumeration value="SikkerDigitalPost" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/HentPrintSertifikatForespoersel.html" name="HentPrintSertifikatForespoersel">
+    <xs:complexType />
+  </xs:element>
+  <xs:element sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/HentPrintSertifikatRespons.html" name="HentPrintSertifikatRespons">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="postkasseleverandoerAdresse" type="xs:string" />
+        <xs:element minOccurs="1" maxOccurs="1" name="X509Sertifikat" type="m:X509Sertifikat" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

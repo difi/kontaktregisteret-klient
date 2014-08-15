@@ -1,0 +1,11 @@
+C:\Projects\dotNet\KontaktregisteretGateway.Tests\bin\Debug\Certificates\idporten-ver2.difi.no-v2.crt
+C:\Projects\dotNet\KontaktregisteretGateway.Tests\bin\Debug\Certificates\WcfClient.pfx
+C:\Projects\dotNet\KontaktregisteretGateway.Tests\bin\Debug\Certificates\WcfClientPublic.cer
+C:\Projects\dotNet\KontaktregisteretGateway.Tests\bin\Debug\KontaktregisteretGateway.Tests.dll.config
+C:\Projects\dotNet\KontaktregisteretGateway.Tests\bin\Debug\KontaktregisteretGateway.Tests.dll
+C:\Projects\dotNet\KontaktregisteretGateway.Tests\bin\Debug\KontaktregisteretGateway.Tests.pdb
+C:\Projects\dotNet\KontaktregisteretGateway.Tests\bin\Debug\KontaktregisteretGateway.dll
+C:\Projects\dotNet\KontaktregisteretGateway.Tests\bin\Debug\KontaktregisteretGateway.pdb
+C:\Projects\dotNet\KontaktregisteretGateway.Tests\obj\Debug\KontaktregisteretGateway.Tests.csprojResolveAssemblyReference.cache
+C:\Projects\dotNet\KontaktregisteretGateway.Tests\obj\Debug\KontaktregisteretGateway.Tests.dll
+C:\Projects\dotNet\KontaktregisteretGateway.Tests\obj\Debug\KontaktregisteretGateway.Tests.pdb
