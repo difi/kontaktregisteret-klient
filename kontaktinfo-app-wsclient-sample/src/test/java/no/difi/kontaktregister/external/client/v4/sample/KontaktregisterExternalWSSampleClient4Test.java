@@ -1,4 +1,4 @@
-package no.difi.kontaktregister.external.client.v3.sample;
+package no.difi.kontaktregister.external.client.v4.sample;
 
 import no.difi.kontaktinfo.external.client.cxf.WSS4JInterceptorHelper;
 
@@ -26,7 +26,7 @@ import static org.junit.Assert.*;
  *
  * @see <a href="https://kontaktinfo-ws.difi.no/kontaktinfo-external/dok/v1">https://kontaktinfo-ws.difi.no/kontaktinfo-external/dok/v1</a>
  */
-public class KontaktregisterExternalWSSampleClientV3Test {
+public class KontaktregisterExternalWSSampleClient4Test {
 
     private static Oppslagstjeneste1405 kontaktinfoPort;
 
@@ -38,7 +38,7 @@ public class KontaktregisterExternalWSSampleClientV3Test {
     	// Optionally set system property "kontaktinfo.address.location" to override the default test endpoint
         String serviceAddress = System.getProperty("kontaktinfo.address.location");
         if(serviceAddress == null) {
-        	serviceAddress = "https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v3";
+        	serviceAddress = "http://localhost:9988/kontaktinfo-web-external/ws-v4";//"https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v4";
         }
 
         // Enables running against alternative endpoints to the one specified in the WSDL

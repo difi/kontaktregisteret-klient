@@ -25,9 +25,11 @@ public class WSS4JInterceptorHelper {
 
         // for outgoing messages: Signature and Timestamp validation
         outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE + " " + WSHandlerConstants.TIMESTAMP);
-        outProps.put(WSHandlerConstants.USER, "client-alias");
+        outProps.put(WSHandlerConstants.USER, "client_alias");
         outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallbackHandler.class.getName());
         outProps.put(WSHandlerConstants.SIG_PROP_FILE, "client_sec.properties");
+        outProps.put(WSHandlerConstants.SIG_KEY_ID, "X509KeyIdentifier");
+        outProps.put(WSHandlerConstants.SIGNATURE_PARTS, "{}{http://schemas.xmlsoap.org/soap/envelope/}Body;{}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp}");
 
         // for incoming messages: Signature and Timestamp validation. Response is Encrypted
         inProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE + " " + WSHandlerConstants.TIMESTAMP + " " + WSHandlerConstants.ENCRYPT);
