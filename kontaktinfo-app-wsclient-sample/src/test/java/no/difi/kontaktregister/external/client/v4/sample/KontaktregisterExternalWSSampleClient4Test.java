@@ -1,5 +1,6 @@
 package no.difi.kontaktregister.external.client.v4.sample;
 
+import no.difi.kontaktinfo.external.client.cxf.OppslagstjenestenKlient;
 import no.difi.kontaktinfo.external.client.cxf.WSS4JInterceptorHelper;
 
 
@@ -12,10 +13,13 @@ import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.apache.cxf.transport.http.HTTPConduit;
+import org.apache.ws.security.handler.WSHandlerConstants;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -38,18 +42,15 @@ public class KontaktregisterExternalWSSampleClient4Test {
     	// Optionally set system property "kontaktinfo.address.location" to override the default test endpoint
         String serviceAddress = System.getProperty("kontaktinfo.address.location");
         if(serviceAddress == null) {
-        	serviceAddress = "http://localhost:9988/kontaktinfo-web-external/ws-v4";//"https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v4";
+        	serviceAddress = "http://localhost:8888/kontaktinfo-web-external/ws-v4";//"https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v4";
         }
 
-        // Enables running against alternative endpoints to the one specified in the WSDL
-        JaxWsProxyFactoryBean jaxWsProxyFactoryBean = new JaxWsProxyFactoryBean();
-        jaxWsProxyFactoryBean.setServiceClass(Oppslagstjeneste1405.class);
-        jaxWsProxyFactoryBean.setAddress(serviceAddress);
-        
-        // Configures WS-Security
-        WSS4JInterceptorHelper.addWSS4JInterceptors(jaxWsProxyFactoryBean);
-        kontaktinfoPort = (Oppslagstjeneste1405) jaxWsProxyFactoryBean.create();
-        
+        Map<String, String> prop= new HashMap<String, String>();
+        prop.put(WSHandlerConstants.SIG_KEY_ID, "X509KeyIdentifier");
+        prop.put(WSHandlerConstants.SIGNATURE_PARTS, "{}{http://schemas.xmlsoap.org/soap/envelope/}Body;{}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp}");
+        OppslagstjenestenKlient oppslagstjenestenKlient = new OppslagstjenestenKlient(serviceAddress, "client_alias", prop);
+        kontaktinfoPort = oppslagstjenestenKlient.getOppslagstjenstePort();
+
         // Optionally set system property "kontaktinfo.ssl.disable" to disable SSL checks to enable running tests against endpoint with invalid SSL setup
         String disableSslChecks = System.getProperty("kontaktinfo.ssl.disable");
         if (disableSslChecks != null && disableSslChecks.equalsIgnoreCase("true")) {

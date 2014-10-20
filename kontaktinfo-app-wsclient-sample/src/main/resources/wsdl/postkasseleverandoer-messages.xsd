@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:m="http://begrep.difi.no"
+           xmlns:sawsdl="http://www.w3.org/ns/sawsdl"
+           xmlns:tns="http://kontaktinfo.difi.no/xsd/postkasseleverandoer/v1"
+           targetNamespace="http://kontaktinfo.difi.no/xsd/postkasseleverandoer/v1"
+           xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+           elementFormDefault="qualified"
+           version="3.0">
+
+    <xs:import namespace="http://begrep.difi.no" schemaLocation="oppslagstjeneste-metadata-14-05.xsd" />
+
+    <xs:annotation>
+        <xs:appinfo>Postkasseleverandoer - Webtjeneste</xs:appinfo>
+        <xs:documentation xml:lang="nb">
+            Skjemaet definerer elementer i webtjeneste for Postkasseleverandoer.
+        </xs:documentation>
+    </xs:annotation>
+
+    <xs:element name="KanVelgeSikkerDigitalPostkasseForespoersel" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/KanVelgeSikkerDigitalPostkasseForespoersel">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="personidentifikator" minOccurs="1" maxOccurs="1" type="m:personidentifikator"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="KanVelgeSikkerDigitalPostkasseRespons" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/KanVelgeSikkerDigitalPostkasseRespons">
+        <xs:complexType>
+            <xs:sequence>
+	            <xs:element name="status" minOccurs="1" maxOccurs="1" type="tns:jaEllerNei"/>
+	            <xs:element name="beskrivelse" minOccurs="0" maxOccurs="1" type="tns:feilBeskrivelse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="VelgSikkerDigitalPostkasseForespoersel" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/VelgSikkerDigitalPostkasseForespoersel">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="personidentifikator" minOccurs="1" maxOccurs="1" type="m:personidentifikator"/>
+                <xs:element name="postkasseleverandoerOrgNummer" minOccurs="1" maxOccurs="1" type="m:postkasseleverandoerAdresse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+     <xs:element name="VelgSikkerDigitalPostkasseRespons" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/VelgSikkerDigitalPostkasseRespons">
+        <xs:complexType>
+            <xs:sequence>
+	            <xs:element name="status" minOccurs="1" maxOccurs="1" type="tns:okEllerFeilet"/>
+	            <xs:element name="beskrivelse" minOccurs="0" maxOccurs="1" type="tns:feilBeskrivelse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+     <xs:element name="OpprettOgVelgSikkerDigitalPostkasseForespoersel" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/OpprettOgVelgSikkerDigitalPostkasseForespoersel">
+    	<xs:complexType>
+    		<xs:sequence>
+				<xs:element name="personidentifikator" minOccurs="1" maxOccurs="1" type="m:personidentifikator"/>
+				<xs:element name="postkasseleverandoerOrgNummer" minOccurs="1" maxOccurs="1" type="m:postkasseleverandoerAdresse"/>
+				<xs:element name="postkasseadresse" minOccurs="1" maxOccurs="1" type="m:postkasseadresse"/>
+				<xs:element name="x509Sertifikat" minOccurs="0" maxOccurs="1" type="m:X509Sertifikat"/>
+    		</xs:sequence>
+    	</xs:complexType>
+    </xs:element>
+    
+    <xs:element name="OpprettOgVelgSikkerDigitalPostkasseRespons" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/OpprettOgVelgSikkerDigitalPostkasseRespons">
+    	<xs:complexType>
+    		<xs:sequence>
+				<xs:element name="status" minOccurs="1" maxOccurs="1" type="tns:okEllerFeilet"/>
+                <xs:element name="beskrivelse" minOccurs="0" maxOccurs="1" type="tns:feilBeskrivelse"/>
+			</xs:sequence>
+    	</xs:complexType>
+    </xs:element>
+    
+    <xs:element name="OpprettPostkasseForespoersel" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/OpprettPostkasseForespoersel">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="personidentifikator" minOccurs="1" maxOccurs="1" type="m:personidentifikator"/>
+                <xs:element name="postkasseleverandoerOrgNummer" minOccurs="1" maxOccurs="1" type="m:postkasseleverandoerAdresse"/>
+                <xs:element name="postkasseadresse" minOccurs="1" maxOccurs="1" type="m:postkasseadresse"/>
+                <xs:element name="x509Sertifikat" minOccurs="0" maxOccurs="1" type="m:X509Sertifikat"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+         <xs:element name="OpprettPostkasseRespons" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/OpprettPostkasseRespons">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" minOccurs="1" maxOccurs="1" type="tns:okEllerFeilet"/>
+                <xs:element name="beskrivelse" minOccurs="0" maxOccurs="1" type="tns:feilBeskrivelse"/>
+                
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="OppdaterPostkasseForespoersel" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/OppdaterPostkasseForespoersel">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="personidentifikator" minOccurs="1" maxOccurs="1" type="m:personidentifikator"/>
+                <xs:element name="postkasseleverandoerOrgNummer" minOccurs="1" maxOccurs="1" type="m:postkasseleverandoerAdresse"/>
+                <xs:element name="postkasseadresse" minOccurs="1" maxOccurs="1" type="m:postkasseadresse"/>
+                <xs:element name="x509Sertifikat" minOccurs="0" maxOccurs="1" type="m:X509Sertifikat"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+         <xs:element name="OppdaterPostkasseRespons" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/OppdaterPostkasseRespons">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" minOccurs="1" maxOccurs="1" type="tns:okEllerFeilet"/>
+                <xs:element name="beskrivelse" minOccurs="0" maxOccurs="1" type="tns:feilBeskrivelse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="SlettPostkasseForespoersel" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/SlettPostkasseForespoersel">
+        <xs:complexType>
+            <xs:sequence>
+            	<xs:element name="personidentifikator" minOccurs="1" maxOccurs="1" type="m:personidentifikator"/>
+                <xs:element name="postkasseleverandoerOrgNummer" minOccurs="1" maxOccurs="1" type="m:postkasseleverandoerAdresse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="SlettPostkasseRespons" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/SlettPostkasseRespons">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" minOccurs="1" maxOccurs="1" type="tns:okEllerFeilet"/> 
+                <xs:element name="beskrivelse" minOccurs="0" maxOccurs="1" type="tns:feilBeskrivelse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:simpleType name="jaEllerNei">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="JA" />
+			<xs:enumeration value="NEI" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="okEllerFeilet">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OK" />
+			<xs:enumeration value="FEILET" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="feilBeskrivelse">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="RESERVERT" />
+			<xs:enumeration value="ALLEREDE_AKTIV" />
+			<xs:enumeration value="INGEN_POSTBOKS_FUNNET" />
+			<xs:enumeration value="BRUKER_IKKE_FUNNET" />
+			<xs:enumeration value="POSTKASSE_EKSISTERER_ALLEREDE" />
+			<xs:enumeration value="UGYLDIG_SERTIFIKAT" />
+			<xs:enumeration value="UGYLDIG_PERSONNUMMER" />
+			<xs:enumeration value="UGYLDIG_EPOSTADRESSE" />
+			<xs:enumeration value="UGYLDIG_ORGNR" />
+		</xs:restriction>
+	</xs:simpleType>
+    
+</xs:schema>

@@ -14,7 +14,6 @@ public class ClientKeystorePasswordCallbackHandler implements CallbackHandler {
             WSPasswordCallback pc = (WSPasswordCallback) callback;
             pc.setPassword("changeit");
             return;
-
         }
     }
 }
