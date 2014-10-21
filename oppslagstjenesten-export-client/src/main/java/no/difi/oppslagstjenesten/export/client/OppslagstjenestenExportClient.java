@@ -73,6 +73,8 @@ public class OppslagstjenestenExportClient {
         System.out.println("Verifying signature stored in file [" + signatureFile + "] for signed file [" + inputEncryptedFile + "] ...");
         final Signature signature = Signature.getInstance("SHA512withRSA/PSS");
         final MGF1ParameterSpec mgf1 = new MGF1ParameterSpec("SHA-512");
+
+        // WARNING: Bouncy Castle represents salt length with bytes, even though API says bits
         final PSSParameterSpec spec1 = new PSSParameterSpec("SHA-512", "MGF1", mgf1, 512 / 8, 1);
         signature.setParameter(spec1);
         signature.initVerify(difiPublicKey);
