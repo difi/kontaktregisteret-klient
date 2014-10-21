@@ -1,8 +1,12 @@
 package no.difi.kontaktinfo.external.client.cxf;
 
 
+import no.difi.begrep.Person;
 import no.difi.kontaktinfo.wsdl.oppslagstjeneste_14_05.Oppslagstjeneste1405;
+import no.difi.kontaktinfo.xsd.oppslagstjeneste._14_05.HentPersonerForespoersel;
+import no.difi.kontaktinfo.xsd.oppslagstjeneste._14_05.HentPersonerRespons;
 import no.difi.kontaktinfo.xsd.oppslagstjeneste._14_05.HentPrintSertifikatForespoersel;
+import no.difi.kontaktinfo.xsd.oppslagstjeneste._14_05.Informasjonsbehov;
 import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.protocol.java.sampler.AbstractJavaSamplerClient;
 import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
@@ -45,11 +49,35 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
             OppslagstjenestenKlient oppslagstjenestenKlient = new OppslagstjenestenKlient(endpoint, alias, prop);
             Oppslagstjeneste1405 kontaktinfoPort = oppslagstjenestenKlient.getOppslagstjenstePort();
 
+
+            HentPersonerForespoersel req = new HentPersonerForespoersel();
+
+            for(String behovStreng: behov.split(",")){
+                Informasjonsbehov b = Informasjonsbehov.valueOf(behovStreng);
+                req.getInformasjonsbehov().add(b);
+            }
+
+
+            String[] ssns = ssn.split(",");
+            for(String s: ssns)
+                req.getPersonidentifikator().add(s);
+
+            result.setSamplerData(alias +"@"+ behov + ": " + ssn);
             result.sampleStart();
-            kontaktinfoPort.hentPrintSertifikat(new HentPrintSertifikatForespoersel());
+            HentPersonerRespons hentPersonerRespons = kontaktinfoPort.hentPersoner(req);
             result.sampleEnd();
 
-            result.setSuccessful(true);
+            int i = 0;
+            for(Person p : hentPersonerRespons.getPerson())
+            {
+                if(p.getKontaktinformasjon().getEpostadresse().getValue().contains(ssns[i++])){
+                    result.setResponseMessage(p.getKontaktinformasjon().getEpostadresse().getValue());
+                    result.setSuccessful(true);
+                }else
+                    result.setSuccessful(false);
+            }
+
+
         }catch(Exception e){
             e.printStackTrace();
             result.setSuccessful(false);
