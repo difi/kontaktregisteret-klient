@@ -17,9 +17,12 @@ import java.security.spec.PSSParameterSpec;
  */
 public class OppslagstjenestenExportClient {
 
+    static{
+        Security.addProvider(new BouncyCastleProvider());
+    }
 
     public static void main(String[] args) throws Exception {
-        Security.addProvider(new BouncyCastleProvider());
+
         // 0. get args
         if (args.length != 9) {
            printUsageAndExit();
@@ -70,7 +73,7 @@ public class OppslagstjenestenExportClient {
         System.out.println("Verifying signature stored in file [" + signatureFile + "] for signed file [" + inputEncryptedFile + "] ...");
         final Signature signature = Signature.getInstance("SHA512withRSA/PSS");
         final MGF1ParameterSpec mgf1 = new MGF1ParameterSpec("SHA-512");
-        final PSSParameterSpec spec1 = new PSSParameterSpec("SHA-512", "MGF1", mgf1, 256 / 8, 1);
+        final PSSParameterSpec spec1 = new PSSParameterSpec("SHA-512", "MGF1", mgf1, 512 / 8, 1);
         signature.setParameter(spec1);
         signature.initVerify(difiPublicKey);
         final FileInputStream signedFileInputStream = new FileInputStream(inputEncryptedFile);
