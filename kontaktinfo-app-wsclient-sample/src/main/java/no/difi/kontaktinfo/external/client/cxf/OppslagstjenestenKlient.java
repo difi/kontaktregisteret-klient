@@ -13,7 +13,7 @@ import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import java.util.Map;
 
 public class OppslagstjenestenKlient {
-//    private final PostkasseleverandoerV1 postkasseleverandoerV1Port;
+    private final PostkasseleverandoerV1 postkasseleverandoerV1Port;
     private String serviceAddress;
     private Oppslagstjeneste1405 oppslagstjenstePort;
 
@@ -21,17 +21,17 @@ public class OppslagstjenestenKlient {
         this.serviceAddress = url;
 
 
-//        // Enables running against alternative endpoints to the one specified in the WSDL
-//        JaxWsProxyFactoryBean jaxWsProxyFactoryBean = new JaxWsProxyFactoryBean();
-//        jaxWsProxyFactoryBean.setServiceClass(PostkasseleverandoerV1.class);
-//        jaxWsProxyFactoryBean.setAddress(serviceAddress);
-//
-//        // Configures WS-Security
-//        WSS4JInterceptorHelper.addWSS4JInterceptors(jaxWsProxyFactoryBean);
-//
-//        postkasseleverandoerV1Port = (PostkasseleverandoerV1) jaxWsProxyFactoryBean.create();
-//
-//        disableSSL(postkasseleverandoerV1Port);
+        // Enables running against alternative endpoints to the one specified in the WSDL
+        JaxWsProxyFactoryBean jaxWsProxyFactoryBean = new JaxWsProxyFactoryBean();
+        jaxWsProxyFactoryBean.setServiceClass(PostkasseleverandoerV1.class);
+        jaxWsProxyFactoryBean.setAddress(serviceAddress);
+
+        // Configures WS-Security
+        WSS4JInterceptorHelper.addWSS4JInterceptors(jaxWsProxyFactoryBean);
+
+        postkasseleverandoerV1Port = (PostkasseleverandoerV1) jaxWsProxyFactoryBean.create();
+
+        disableSSL(postkasseleverandoerV1Port);
 
         JaxWsProxyFactoryBean jaxWsProxyFactoryBeanOppslagstjenste = new JaxWsProxyFactoryBean();
         jaxWsProxyFactoryBeanOppslagstjenste.setServiceClass(Oppslagstjeneste1405.class);
@@ -43,8 +43,6 @@ public class OppslagstjenestenKlient {
         oppslagstjenstePort = (Oppslagstjeneste1405) jaxWsProxyFactoryBeanOppslagstjenste.create();
 
         disableSSL(oppslagstjenstePort);
-
-
 
     }
 
@@ -75,10 +73,10 @@ public class OppslagstjenestenKlient {
         System.setProperty("com.sun.net.ssl.checkRevocation", "false");
     }
 
-//
-//    public PostkasseleverandoerV1 getPostkassePort() {
-//        return postkasseleverandoerV1Port;
-//    }
+
+    public PostkasseleverandoerV1 getPostkassePort() {
+        return postkasseleverandoerV1Port;
+    }
 
     public Oppslagstjeneste1405 getOppslagstjenstePort(){
         return oppslagstjenstePort;
