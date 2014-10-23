@@ -13,7 +13,8 @@ For informasjon om kontakt- og reservasjonsregisteret og tilhørende oppslagstje
 
 h3. Forløpig er følgende tilgjengelig:
 
-- Java-Testklient for Oppslagstjenesten, eksempelkode som lar en hente ut brukerinformasjon fra Oppslagstjenesten.
+- Java-Testklient for Oppslagstjenesten
+- .Net-Testklient for Oppslagstjenesten 
 - SoapUI prosjekt for test av Oppslagstjenesten
 - Java-kode for dekryptering av filer for Oppslagstjenesten eksport
 
