@@ -11,6 +11,7 @@ import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.protocol.java.sampler.AbstractJavaSamplerClient;
 import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
 import org.apache.jmeter.samplers.SampleResult;
+import org.apache.log4j.Logger;
 import org.apache.ws.security.handler.WSHandlerConstants;
 
 import java.io.Serializable;
@@ -19,6 +20,7 @@ import java.util.Map;
 
 public class JMeterSampler extends AbstractJavaSamplerClient implements Serializable {
 
+    final static Logger LOGGER = Logger.getLogger(JMeterSampler.class);
 
     @Override
     public Arguments getDefaultParameters() {
@@ -39,7 +41,8 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
         String behov = javaSamplerContext.getParameter("informasjonsbehov");
         String alias = javaSamplerContext.getParameter("alias");
 
-        System.out.println("called sampler " + String.format("%s,%s,%s,%s", endpoint, ssn, behov, alias));
+        final String inputData = String.format("%s,%s,%s,%s", endpoint, ssn, behov, alias);
+        LOGGER.debug("called sampler " + inputData);
 
         SampleResult result = new SampleResult();
         try {
@@ -57,22 +60,25 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
 
             if (hentPersonerRespons == null || hentPersonerRespons.getPerson() == null) {
                 result.setSuccessful(false);
+                LOGGER.error("hentPersonerRespons is null or hentPersonerRespons.getPerson is null. hentPersonerRespons=" + hentPersonerRespons);
             } else if (map.size() != hentPersonerRespons.getPerson().size()) {
                 result.setSuccessful(false);
+                LOGGER.error("request map size is not equal to response size: " + map.size() + " vs " + hentPersonerRespons.getPerson().size());
             } else {
                 validerRespons(result, map, hentPersonerRespons);
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(inputData, e);
         } finally {
             if (result.getStartTime() == 0l) {
                 result.sampleStart();
                 result.setSuccessful(false);
+                LOGGER.error("Failed before sampler started with input: " + inputData);
             }
         }
 
-        System.out.println("called sampler done!");
+        LOGGER.debug("called sampler done!");
         return result;
 
     }
@@ -118,11 +124,11 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
         int i = 0;
         for (Person p : hentPersonerRespons.getPerson()) {
             boolean havePostkasse = map.get(p.getPersonidentifikator())[2].equals("1");
-            System.out.println(p.getPersonidentifikator());
-            if (!p.getKontaktinformasjon().getEpostadresse().getValue().contains(p.getPersonidentifikator()))
+            LOGGER.debug(p.getPersonidentifikator());
+            if (!p.getKontaktinformasjon().getEpostadresse().getValue().contains(p.getPersonidentifikator())) {
                 result.setSuccessful(false);
-
-            System.out.println(p.getSikkerDigitalPostAdresse());
+                LOGGER.error("Epostadresse does not contain SSN: " + p.getSikkerDigitalPostAdresse() != null ? p.getSikkerDigitalPostAdresse().toString() : null);
+            }
             if (havePostkasse) {
                 result.setSuccessful(p.getSikkerDigitalPostAdresse() != null);
             } else {
