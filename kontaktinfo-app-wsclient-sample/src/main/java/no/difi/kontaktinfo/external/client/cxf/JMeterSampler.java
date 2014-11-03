@@ -29,6 +29,7 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
         defaultParameters.addArgument("Data", "[[\"12121212345\",\"0\",\"0\"]]");
         defaultParameters.addArgument("informasjonsbehov", "PERSON,SERTIFIKAT");
         defaultParameters.addArgument("alias", "client_alias");
+        defaultParameters.addArgument("configureForV4", "true");
 
         return defaultParameters;
     }
@@ -40,13 +41,14 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
         String ssn = javaSamplerContext.getParameter("Data");
         String behov = javaSamplerContext.getParameter("informasjonsbehov");
         String alias = javaSamplerContext.getParameter("alias");
+        boolean configureForV4 = "true".equals(javaSamplerContext.getParameter("configureForV4"));
 
         final String inputData = String.format("%s,%s,%s,%s", endpoint, ssn, behov, alias);
         LOGGER.debug("called sampler " + inputData);
 
         SampleResult result = new SampleResult();
         try {
-            OppslagstjenestenKlient oppslagstjenestenKlient = new OppslagstjenestenKlient(endpoint, alias, createWSConfigForV4());
+            OppslagstjenestenKlient oppslagstjenestenKlient = new OppslagstjenestenKlient(endpoint, alias, createWSConfigForV4(configureForV4));
             Oppslagstjeneste1405 kontaktinfoPort = oppslagstjenestenKlient.getOppslagstjenstePort();
 
             HentPersonerForespoersel req = new HentPersonerForespoersel();
@@ -83,10 +85,12 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
 
     }
 
-    private Map<String, String> createWSConfigForV4() {
+    private Map<String, String> createWSConfigForV4(boolean configureForV4) {
         Map<String, String> prop = new HashMap<String, String>();
         prop.put(WSHandlerConstants.SIG_KEY_ID, "X509KeyIdentifier");
-        prop.put(WSHandlerConstants.SIGNATURE_PARTS, "{}{http://schemas.xmlsoap.org/soap/envelope/}Body;{}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp}");
+        if (configureForV4) {
+            prop.put(WSHandlerConstants.SIGNATURE_PARTS, "{}{http://schemas.xmlsoap.org/soap/envelope/}Body;{}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp}");
+        }
         return prop;
     }
 
