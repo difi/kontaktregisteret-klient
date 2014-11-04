@@ -1,12 +1,10 @@
 package no.difi.kontaktinfo.external.client.cxf;
 
 import org.apache.cxf.interceptor.InterceptorProvider;
-import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 import org.apache.ws.security.handler.WSHandlerConstants;
-
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,11 +45,9 @@ public class WSS4JInterceptorHelper {
      * @param interceptorProvider the provider to configure.
      */
     public static void addWSS4JInterceptors(InterceptorProvider interceptorProvider) {
-        interceptorProvider.getInInterceptors().add(new WSS4JInInterceptor(getInProperties()));
-        interceptorProvider.getInInterceptors().add(new LoggingInInterceptor());
-
-        interceptorProvider.getOutInterceptors().add(new WSS4JOutInterceptor(getOutProperties("client_alias")));
-        interceptorProvider.getOutInterceptors().add(new LoggingOutInterceptor());
+        final WSS4JInInterceptor in = new WSS4JInInterceptor(getInProperties());
+        final WSS4JOutInterceptor out = new WSS4JOutInterceptor(getOutProperties("client_alias"));
+        addWSS4JInterceptors(interceptorProvider, in, out);
     }
 
 
@@ -62,7 +58,7 @@ public class WSS4JInterceptorHelper {
      */
     public static void addWSS4JInterceptors(InterceptorProvider interceptorProvider, WSS4JInInterceptor in, WSS4JOutInterceptor out) {
         interceptorProvider.getInInterceptors().add(in);
-        interceptorProvider.getInInterceptors().add(new LoggingInInterceptor());
+        interceptorProvider.getInInterceptors().add(new ErrorLoggingInInterceptor());
 
         interceptorProvider.getOutInterceptors().add(out);
         interceptorProvider.getOutInterceptors().add(new LoggingOutInterceptor());
