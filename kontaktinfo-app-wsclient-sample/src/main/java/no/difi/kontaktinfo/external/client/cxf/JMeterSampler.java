@@ -25,6 +25,7 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
     @Override
     public Arguments getDefaultParameters() {
         Arguments defaultParameters = new Arguments();
+//        defaultParameters.addArgument("Endpoint", "https://kontaktinfo-ws-yt2.difi.eon.no/kontaktinfo-external/ws-v4");
         defaultParameters.addArgument("Endpoint", "http://localhost:8888/kontaktinfo-web-external/ws-v4");
         defaultParameters.addArgument("Data", "[[\"12121212345\",\"0\",\"0\"]]");
         defaultParameters.addArgument("informasjonsbehov", "PERSON,SERTIFIKAT");
@@ -131,7 +132,7 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
             LOGGER.debug(p.getPersonidentifikator());
             if (!p.getKontaktinformasjon().getEpostadresse().getValue().contains(p.getPersonidentifikator())) {
                 result.setSuccessful(false);
-                LOGGER.error("Epostadresse does not contain SSN: " + p.getSikkerDigitalPostAdresse() != null ? p.getSikkerDigitalPostAdresse().toString() : null);
+                LOGGER.error("Epostadresse does not contain SSN: " + (p.getSikkerDigitalPostAdresse() != null ? p.getSikkerDigitalPostAdresse().toString() : null));
             }
             if (havePostkasse) {
                 result.setSuccessful(p.getSikkerDigitalPostAdresse() != null);
