@@ -10,6 +10,7 @@ import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor;
 import org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor;
 
+import java.util.List;
 import java.util.Map;
 
 public class OppslagstjenestenKlient {
@@ -17,7 +18,7 @@ public class OppslagstjenestenKlient {
     private String serviceAddress;
     private Oppslagstjeneste1405 oppslagstjenstePort;
 
-    public OppslagstjenestenKlient(String url, WSS4JInInterceptor in, WSS4JOutInterceptor out){
+    public OppslagstjenestenKlient(String url, WSS4JInInterceptor in, WSS4JOutInterceptor out, List<String> responseList){
         this.serviceAddress = url;
 
 
@@ -27,7 +28,7 @@ public class OppslagstjenestenKlient {
         jaxWsProxyFactoryBean.setAddress(serviceAddress);
 
         // Configures WS-Security
-        WSS4JInterceptorHelper.addWSS4JInterceptors(jaxWsProxyFactoryBean);
+        WSS4JInterceptorHelper.addWSS4JInterceptors(jaxWsProxyFactoryBean, responseList);
 
         postkasseleverandoerV1Port = (PostkasseleverandoerV1) jaxWsProxyFactoryBean.create();
 
@@ -38,7 +39,7 @@ public class OppslagstjenestenKlient {
         jaxWsProxyFactoryBeanOppslagstjenste.setAddress(serviceAddress);
 
         // Configures WS-Security
-        WSS4JInterceptorHelper.addWSS4JInterceptors(jaxWsProxyFactoryBeanOppslagstjenste, in, out);
+        WSS4JInterceptorHelper.addWSS4JInterceptors(jaxWsProxyFactoryBeanOppslagstjenste, in, out, responseList);
 
         oppslagstjenstePort = (Oppslagstjeneste1405) jaxWsProxyFactoryBeanOppslagstjenste.create();
 
@@ -48,12 +49,12 @@ public class OppslagstjenestenKlient {
 
     }
 
-    public OppslagstjenestenKlient(String url, String keystoreAlias, Map<String, String> properties) {
+    public OppslagstjenestenKlient(String url, String keystoreAlias, Map<String, String> properties, List<String> responseList) {
         this(
                 url,
                 new WSS4JInInterceptor(WSS4JInterceptorHelper.getInProperties()),
-                new WSS4JOutInterceptor(OppslagstjenestenKlient.addExtra(WSS4JInterceptorHelper.getOutProperties(keystoreAlias), properties))
-        );
+                new WSS4JOutInterceptor(OppslagstjenestenKlient.addExtra(WSS4JInterceptorHelper.getOutProperties(keystoreAlias), properties)),
+                responseList);
     }
 
     private static Map<String, Object> addExtra(Map<String, Object> outProperties, Map<String, String> properties) {
@@ -62,7 +63,7 @@ public class OppslagstjenestenKlient {
     }
 
     public OppslagstjenestenKlient(String s) {
-        this(s, new WSS4JInInterceptor(WSS4JInterceptorHelper.getInProperties()), new WSS4JOutInterceptor(WSS4JInterceptorHelper.getOutProperties("client-alias")));
+        this(s, new WSS4JInInterceptor(WSS4JInterceptorHelper.getInProperties()), new WSS4JOutInterceptor(WSS4JInterceptorHelper.getOutProperties("client-alias")), null);
     }
 
 

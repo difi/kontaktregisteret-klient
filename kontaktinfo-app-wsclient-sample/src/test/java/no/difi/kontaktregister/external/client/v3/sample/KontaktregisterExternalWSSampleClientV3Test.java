@@ -47,7 +47,7 @@ public class KontaktregisterExternalWSSampleClientV3Test {
         jaxWsProxyFactoryBean.setAddress(serviceAddress);
         
         // Configures WS-Security
-        WSS4JInterceptorHelper.addWSS4JInterceptors(jaxWsProxyFactoryBean);
+        WSS4JInterceptorHelper.addWSS4JInterceptors(jaxWsProxyFactoryBean, null);
         kontaktinfoPort = (Oppslagstjeneste1405) jaxWsProxyFactoryBean.create();
         
         // Optionally set system property "kontaktinfo.ssl.disable" to disable SSL checks to enable running tests against endpoint with invalid SSL setup
