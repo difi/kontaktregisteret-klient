@@ -12,10 +12,9 @@ public class ClientKeystorePasswordCallbackHandler implements CallbackHandler {
     public void handle(Callback[] callbacks) {
         for (Callback callback : callbacks) {
             WSPasswordCallback pc = (WSPasswordCallback) callback;
-            if (pc.getIdentifier().equals("client-alias")) {
-                pc.setPassword("changeit");
-                return;
-            }
+            pc.setPassword("changeit");
+            return;
+
         }
     }
 }
