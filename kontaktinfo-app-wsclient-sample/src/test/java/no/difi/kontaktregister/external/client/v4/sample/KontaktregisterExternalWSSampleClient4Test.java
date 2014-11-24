@@ -38,7 +38,7 @@ public class KontaktregisterExternalWSSampleClient4Test {
     	// Optionally set system property "kontaktinfo.address.location" to override the default test endpoint
         String serviceAddress = System.getProperty("kontaktinfo.address.location");
         if(serviceAddress == null) {
-        	serviceAddress = "http://localhost:9988/kontaktinfo-web-external/ws-v4";//"https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v4";
+        	serviceAddress = "https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v4";
         }
 
         // Enables running against alternative endpoints to the one specified in the WSDL
