@@ -16,6 +16,7 @@ h3. Forløpig er følgende tilgjengelig:
 - Java-Testklient for Oppslagstjenesten
 - .Net-Testklient for Oppslagstjenesten 
 - SoapUI prosjekt for test av Oppslagstjenesten
+- .NET klient for Oppslagstjenesten, eksmpelkode som lar en hente ut brukerinformasjon fra Oppslagstjenesten.
 - Java-kode for dekryptering av filer for Oppslagstjenesten eksport
 
 
