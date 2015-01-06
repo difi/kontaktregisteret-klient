@@ -1,18 +1,19 @@
 Innstallasjonsguide for Testklient av  Oppslagstjenesten
-Utgave 0.1, 2014-03-19, Lars Bårdgard Åstveit
+Utgave 0.1, 2014-03-19, Lars BÃ¥rdgard Ã…stveit
 
 Introduksjon
-Testklient for Oppslagstjenesten er eksempelkode som lar en hente ut brukerinformasjon fra Oppslagstjenesten ( http://begrep.difi.no/Oppslagstjenesten/  ). Dette dokumentet beskriver de nødvendige stegene for å installere Testklient for Oppslagstjenesten. Testklienten er satt opp med en integrasjon mot testmiljøet VER2 hos Difi.
+Testklient for Oppslagstjenesten er eksempelkode som lar en hente ut brukerinformasjon fra Oppslagstjenesten ( http://begrep.difi.no/Oppslagstjenesten/Â  ). Dette dokumentet beskriver de nÃ¸dvendige stegene for Ã¥ installere Testklient for Oppslagstjenesten. Testklienten er satt opp med en integrasjon mot testmiljÃ¸et VER2 hos Difi.
 
-Nødvendige forutsetninger
-Følgende programvare må være installert:
+NÃ¸dvendige forutsetninger
+FÃ¸lgende programvare mÃ¥ vÃ¦re installert:
 - Maven
 - Git
+- JCE unlimited strength policies - http://www.oracle.com/technetwork/java/embedded/embedded-se/downloads/jce-7-download-432124.html
 
 Installasjon av applikasjon:
-Last ned prosjektet, og åpne i valgfri IDE. Kjør følgende kommando: "mvn clean package". Programmet vil da bli bygd, og man kan se genererte kodeeksempler som kan bli brukt videre som kokebok for egen implementasjon.
-Det er lagt inn noen tester i programmet som henter ut diverse brukerdata for å vise kodesyntaks.
-Det er mulig å hente ut informasjon via følgende 3 SOAP-WS API-metoder;
+Last ned prosjektet, og Ã¥pne i valgfri IDE. KjÃ¸r fÃ¸lgende kommando:Â "mvn clean package".Â Programmet vil da bli bygd, og man kan se genererte kodeeksempler som kan bli brukt videre som kokebok for egen implementasjon.
+Det er lagt inn noen tester i programmet som henter ut diverse brukerdata for Ã¥ vise kodesyntaks.
+Det er mulig Ã¥ hente ut informasjon via fÃ¸lgende 3 SOAP-WS API-metoder;
 	- HentPersoner
 	- HentEndringer
 	- HentPrintSertifikat
