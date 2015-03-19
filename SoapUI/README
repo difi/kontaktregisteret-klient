@@ -1,3 +1,18 @@
+SOAP-UI MOT KONTAKTREGISTERET
+====
+
+Installasjon
+====
+
+Installer soap ui 4.5.1 og last ned JCE for java 7. Så installer JCE i soapui sin java installsjon. 
+Denne ligger i installasjonsmappen til soapui. 
+Og de to jar filene skal under jre/lib/security. 
+Husk å restarte soap ui etter insallasjonen av JCE.
+
+
+Kjente problemer
+==
+
 Det er et kjent problem at dette prosjektet ikke fungerer med nyere versjoner av SoapUI. 
 
 Prosjektet skal fungere fint med versjon 4.5.1, som kan lastes ned fra: http://sourceforge.net/projects/soapui/files/soapui/4.5.1/
