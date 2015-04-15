@@ -36,16 +36,19 @@ public class KontaktregisterExternalWSSampleClient4Test {
 
     private static final String TEST_SSN_1 = "02018090573";
     private static final String TEST_SSN_2 = "02018090301";
-    
+    private static final String TEST_SSN_3 = "01010209303";
+
     @BeforeClass
     public static void beforeClass() {
-    	// Optionally set system property "kontaktinfo.address.location" to override the default test endpoint
+        // Optionally set system property "kontaktinfo.address.location" to override the default test endpoint
         String serviceAddress = System.getProperty("kontaktinfo.address.location");
-        if(serviceAddress == null) {
-        	serviceAddress = "https://kontaktinfo-ws-test1.difi.eon.no/kontaktinfo-external/ws-v4";//"https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v4";
+        if (serviceAddress == null) {
+//        	serviceAddress = "https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v4";
+            serviceAddress = "https://kontaktinfo-ws-yt2.difi.eon.no/kontaktinfo-external/ws-v4";
+//        	serviceAddress = "https://kontaktinfo-ws-test1.difi.eon.no/kontaktinfo-external/ws-v4";
         }
 
-        Map<String, String> prop= new HashMap<String, String>();
+        Map<String, String> prop = new HashMap<String, String>();
         prop.put(WSHandlerConstants.SIG_KEY_ID, "X509KeyIdentifier");
         prop.put(WSHandlerConstants.SIGNATURE_PARTS, "{}{http://schemas.xmlsoap.org/soap/envelope/}Body;{}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp}");
         OppslagstjenestenKlient oppslagstjenestenKlient = new OppslagstjenestenKlient(serviceAddress, "client_alias", prop);
@@ -54,41 +57,58 @@ public class KontaktregisterExternalWSSampleClient4Test {
         // Optionally set system property "kontaktinfo.ssl.disable" to disable SSL checks to enable running tests against endpoint with invalid SSL setup
         String disableSslChecks = System.getProperty("kontaktinfo.ssl.disable");
         if (disableSslChecks != null && disableSslChecks.equalsIgnoreCase("true")) {
-            Client client = ClientProxy.getClient(kontaktinfoPort);
-            HTTPConduit httpConduit = (HTTPConduit) client.getConduit();
-            TLSClientParameters tlsClientParameters = new TLSClientParameters();
-            tlsClientParameters.setDisableCNCheck(true);
-            httpConduit.setTlsClientParameters(tlsClientParameters);
-            System.setProperty("com.sun.net.ssl.checkRevocation", "false");
+            disableSSLChecks();
         }
+    }
+
+    private static void disableSSLChecks() {
+        Client client = ClientProxy.getClient(kontaktinfoPort);
+        HTTPConduit httpConduit = (HTTPConduit) client.getConduit();
+        TLSClientParameters tlsClientParameters = new TLSClientParameters();
+        tlsClientParameters.setDisableCNCheck(true);
+        httpConduit.setTlsClientParameters(tlsClientParameters);
+        System.setProperty("com.sun.net.ssl.checkRevocation", "false");
     }
 
     @Test
     public void testHentKontaktSertifikat() {
-    	HentPrintSertifikatForespoersel print = new HentPrintSertifikatForespoersel(); 
-    	HentPrintSertifikatRespons response = kontaktinfoPort.hentPrintSertifikat(print);
-    	assertTrue(response.getPostkasseleverandoerAdresse().length() > 0);
-    	assertTrue(response.getX509Sertifikat().length > 0);
+        HentPrintSertifikatForespoersel print = new HentPrintSertifikatForespoersel();
+        HentPrintSertifikatRespons response = kontaktinfoPort.hentPrintSertifikat(print);
+        assertTrue(response.getPostkasseleverandoerAdresse().length() > 0);
+        assertTrue(response.getX509Sertifikat().length > 0);
     }
 
     @Test
-    public void testHentKontaktinfo(){
-    	HentPersonerForespoersel personas = new HentPersonerForespoersel();
-    	personas.getInformasjonsbehov().add(Informasjonsbehov.KONTAKTINFO);
-    	personas.getPersonidentifikator().addAll(Arrays.asList(TEST_SSN_1, TEST_SSN_2));
-    	HentPersonerRespons personasResponse = kontaktinfoPort.hentPersoner(personas);
-    	assertNotNull(personasResponse);
-    	assertEquals(TEST_SSN_1, personasResponse.getPerson().get(0).getPersonidentifikator());
-    	assertEquals(TEST_SSN_2, personasResponse.getPerson().get(1).getPersonidentifikator());
+    public void testHentKontaktinfo() {
+        HentPersonerForespoersel personas = new HentPersonerForespoersel();
+        personas.getInformasjonsbehov().add(Informasjonsbehov.KONTAKTINFO);
+        personas.getPersonidentifikator().addAll(Arrays.asList(TEST_SSN_1, TEST_SSN_2));
+        HentPersonerRespons personasResponse = kontaktinfoPort.hentPersoner(personas);
+        assertNotNull(personasResponse);
+        assertEquals(TEST_SSN_1, personasResponse.getPerson().get(0).getPersonidentifikator());
+        assertEquals(TEST_SSN_2, personasResponse.getPerson().get(1).getPersonidentifikator());
     }
 
     @Test
-    public void testHentEndringer(){
-    	HentEndringerForespoersel endringerForespoersel = new HentEndringerForespoersel();
-    	endringerForespoersel.getInformasjonsbehov().add(Informasjonsbehov.KONTAKTINFO);
-    	endringerForespoersel.setFraEndringsNummer(600);
-    	HentEndringerRespons endringerRespons = kontaktinfoPort.hentEndringer(endringerForespoersel);
-    	assertNotNull(endringerRespons);
+    public void testHentKontaktinfoForPerson() {
+        HentPersonerForespoersel personas = new HentPersonerForespoersel();
+        personas.getInformasjonsbehov().add(Informasjonsbehov.KONTAKTINFO);
+        personas.getInformasjonsbehov().add(Informasjonsbehov.SIKKER_DIGITAL_POST);
+        personas.getInformasjonsbehov().add(Informasjonsbehov.SERTIFIKAT);
+        personas.getInformasjonsbehov().add(Informasjonsbehov.PERSON);
+        personas.getPersonidentifikator().addAll(Arrays.asList(TEST_SSN_3));
+        HentPersonerRespons personasResponse = kontaktinfoPort.hentPersoner(personas);
+        assertNotNull(personasResponse);
+        assertEquals(TEST_SSN_3, personasResponse.getPerson().get(0).getPersonidentifikator());
+    }
+
+    @Test
+    public void testHentEndringer() {
+        HentEndringerForespoersel endringerForespoersel = new HentEndringerForespoersel();
+        endringerForespoersel.getInformasjonsbehov().add(Informasjonsbehov.KONTAKTINFO);
+        endringerForespoersel.setFraEndringsNummer(600);
+        HentEndringerRespons endringerRespons = kontaktinfoPort.hentEndringer(endringerForespoersel);
+        assertNotNull(endringerRespons);
     }
 
 }
