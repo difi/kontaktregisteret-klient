@@ -1,6 +1,0 @@
-C:\Projects\dotNet\KontaktregisteretGateway\bin\Debug\KontaktregisteretGateway.dll.config
-C:\Projects\dotNet\KontaktregisteretGateway\bin\Debug\KontaktregisteretGateway.dll
-C:\Projects\dotNet\KontaktregisteretGateway\bin\Debug\KontaktregisteretGateway.pdb
-C:\Projects\dotNet\KontaktregisteretGateway\obj\Debug\KontaktregisteretGateway.csprojResolveAssemblyReference.cache
-C:\Projects\dotNet\KontaktregisteretGateway\obj\Debug\KontaktregisteretGateway.dll
-C:\Projects\dotNet\KontaktregisteretGateway\obj\Debug\KontaktregisteretGateway.pdb
