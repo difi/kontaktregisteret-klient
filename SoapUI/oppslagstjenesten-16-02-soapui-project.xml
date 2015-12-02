@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="43f5fdfa-193e-40f8-a1ce-fd1580ab4920" activeEnvironment="Default" name="oppslagstjeneste-ws-16-02" resourceRoot="" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="cad5c46f-4e30-4f15-90a2-6929050ccb76" wsaVersion="NONE" name="oppslagstjeneste-16-02_SOAP12Binding" type="wsdl" bindingName="{http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02}oppslagstjeneste-16-02_SOAP12Binding" soapVersion="1_2" anonymous="optional" definition="file:/C:/develop/eid/digitalkontaktinfo/kontaktinfo-web-external/src/main/resources/wsdl/ws-v5/oppslagstjeneste-ws-16-02.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\develop\eid\digitalkontaktinfo\kontaktinfo-web-external\src\main\resources\wsdl\ws-v5\oppslagstjeneste-ws-16-02.wsdl"><con:part><con:url>file:\C:\develop\eid\digitalkontaktinfo\kontaktinfo-web-external\src\main\resources\wsdl\ws-v5\oppslagstjeneste-ws-16-02.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="kontaktinfo-oppslagstjeneste-16-02" targetNamespace="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02" xmlns:ot14-05="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/14-05">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/14-05" schemaLocation="../ws-v3/oppslagstjeneste-ws-14-05.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="HentEndringerForespoersel">
+    <wsdl:part name="HentEndringerForespoersel" element="ot14-05:HentEndringerForespoersel"/>
+  </wsdl:message>
+  <wsdl:message name="HentEndringerRespons">
+    <wsdl:part name="HentEndringerRespons" element="ot14-05:HentEndringerRespons"/>
+  </wsdl:message>
+  <wsdl:message name="HentPersonerForespoersel">
+    <wsdl:part name="HentPersonerForespoersel" element="ot14-05:HentPersonerForespoersel"/>
+  </wsdl:message>
+  <wsdl:message name="HentPersonerRespons">
+    <wsdl:part name="HentPersonerRespons" element="ot14-05:HentPersonerRespons"/>
+  </wsdl:message>
+  <wsdl:message name="HentPrintSertifikatForespoersel">
+    <wsdl:part name="HentPrintSertifikatForespoersel" element="ot14-05:HentPrintSertifikatForespoersel"/>
+  </wsdl:message>
+  <wsdl:message name="HentPrintSertifikatRespons">
+    <wsdl:part name="HentPrintSertifikatRespons" element="ot14-05:HentPrintSertifikatRespons"/>
+  </wsdl:message>
+  <wsdl:portType name="oppslagstjeneste-16-02">
+    <wsdl:operation name="HentEndringer">
+      <wsdl:input message="tns:HentEndringerForespoersel"/>
+      <wsdl:output message="tns:HentEndringerRespons"/>
+    </wsdl:operation>
+    <wsdl:operation name="HentPersoner">
+      <wsdl:input message="tns:HentPersonerForespoersel"/>
+      <wsdl:output message="tns:HentPersonerRespons"/>
+    </wsdl:operation>
+    <wsdl:operation name="HentPrintSertifikat">
+      <wsdl:input message="tns:HentPrintSertifikatForespoersel"/>
+      <wsdl:output message="tns:HentPrintSertifikatRespons"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="oppslagstjeneste-16-02_SOAP12Binding" type="tns:oppslagstjeneste-16-02">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="HentEndringer">
+      <soap12:operation soapAction=""/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HentPersoner">
+      <soap12:operation soapAction=""/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HentPrintSertifikat">
+      <soap12:operation soapAction=""/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="oppslagstjeneste-16-02">
+    <wsdl:port binding="tns:oppslagstjeneste-16-02_SOAP12Binding" name="oppslagstjeneste_SOAP12">
+      <soap12:address location="/ws-v5"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\C:\develop\eid\digitalkontaktinfo\kontaktinfo-web-external\src\main\resources\wsdl\ws-v3\oppslagstjeneste-ws-14-05.xsd</con:url><con:content><![CDATA[<xs:schema targetNamespace="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/14-05" elementFormDefault="qualified" version="3.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:m="http://begrep.difi.no" xmlns:sawsdl="http://www.w3.org/ns/sawsdl" xmlns:tns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/14-05" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+  <xs:import namespace="http://begrep.difi.no" schemaLocation="oppslagstjeneste-metadata-14-05.xsd"/>
+  <xs:annotation>
+    <xs:appinfo>Oppslagstjenesten - Webtjeneste</xs:appinfo>
+    <xs:documentation xml:lang="nb">Skjemaet definerer elementer i webtjeneste for Oppslagstjenesten Digitalt kontakt- og reservasjonsregister.</xs:documentation>
+  </xs:annotation>
+  <xs:element name="HentPersonerForespoersel" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/HentPersonerForespoersel.html">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="tns:informasjonsbehov" name="informasjonsbehov" maxOccurs="unbounded"/>
+        <xs:element name="personidentifikator" minOccurs="1" maxOccurs="1000" type="m:personidentifikator"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HentPersonerRespons" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/HentPersonerRespons.html">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="m:Person" minOccurs="1" maxOccurs="1000"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HentEndringerForespoersel" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/HentEndringerForespoersel.html">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="tns:informasjonsbehov" name="informasjonsbehov" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute type="tns:fraEndringsNummer" name="fraEndringsNummer" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="fraEndringsNummer" sawsdl:modelReference="http://begrep.difi.no/Felles/fraEndringsNummer.html">
+    <xs:restriction base="xs:long"/>
+  </xs:simpleType>
+  <xs:simpleType name="tilEndringsNummer" sawsdl:modelReference="http://begrep.difi.no/Felles/tilEndringsNummer.html">
+    <xs:restriction base="xs:long"/>
+  </xs:simpleType>
+  <xs:simpleType name="senesteEndringsNummer" sawsdl:modelReference="http://begrep.difi.no/Felles/senesteEndringsNummer.html">
+    <xs:restriction base="xs:long"/>
+  </xs:simpleType>
+  <xs:element name="HentEndringerRespons" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/HentEndringerRespons.html">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="m:Person" minOccurs="0" maxOccurs="1000"/>
+      </xs:sequence>
+      <xs:attribute type="tns:fraEndringsNummer" name="fraEndringsNummer" use="required"/>
+      <xs:attribute type="tns:tilEndringsNummer" name="tilEndringsNummer" use="required"/>
+      <xs:attribute type="tns:senesteEndringsNummer" name="senesteEndringsNummer" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="informasjonsbehov" sawsdl:modelReference="http://begrep.difi.no/Felles/informasjonsbehov.html">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Person"/>
+      <xs:enumeration value="Kontaktinfo"/>
+      <xs:enumeration value="Sertifikat"/>
+      <xs:enumeration value="SikkerDigitalPost"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="HentPrintSertifikatForespoersel" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/HentPrintSertifikatForespoersel.html">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="HentPrintSertifikatRespons" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/HentPrintSertifikatRespons.html">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="postkasseleverandoerAdresse" type="xs:string" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="X509Sertifikat" type="m:X509Sertifikat" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\develop\eid\digitalkontaktinfo\kontaktinfo-web-external\src\main\resources\wsdl\ws-v3\oppslagstjeneste-metadata-14-05.xsd</con:url><con:content><![CDATA[<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://begrep.difi.no" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://begrep.difi.no">
+  <xs:annotation>
+    <xs:appinfo>Metadata for Oppslagstjenesten</xs:appinfo>
+    <xs:documentation xml:lang="nb">Definisjon av XML-typer benyttet i webtjeneste-grensesnitt.</xs:documentation>
+  </xs:annotation>
+  <xs:element name="Person" type="tns:Person"/>
+  <xs:complexType name="Person">
+    <xs:sequence>
+      <xs:element type="tns:personidentifikator" name="personidentifikator"/>
+      <xs:element type="tns:reservasjon" name="reservasjon" minOccurs="0"/>
+      <xs:element type="tns:status" name="status" minOccurs="0"/>
+      <xs:element type="tns:beskrivelse" name="beskrivelse" minOccurs="0"/>
+      <xs:element type="tns:Kontaktinformasjon" name="Kontaktinformasjon" minOccurs="0"/>
+      <xs:element type="tns:SikkerDigitalPostAdresse" name="SikkerDigitalPostAdresse" minOccurs="0"/>
+      <xs:element name="X509Sertifikat" type="tns:X509Sertifikat" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="X509Sertifikat">
+    <xs:restriction base="xs:base64Binary"/>
+  </xs:simpleType>
+  <xs:simpleType name="personidentifikator">
+    <xs:restriction base="xs:string">
+      <xs:length value="11"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="status">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AKTIV"/>
+      <xs:enumeration value="SLETTET"/>
+      <xs:enumeration value="IKKE_REGISTRERT"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="postkasseleverandoerOrgNummer">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:simpleType name="beskrivelse">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:simpleType name="reservasjon">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="JA"/>
+      <xs:enumeration value="NEI"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Kontaktinformasjon">
+    <xs:sequence>
+      <xs:element type="tns:Mobiltelefonnummer" name="Mobiltelefonnummer" minOccurs="0"/>
+      <xs:element type="tns:Epostadresse" name="Epostadresse" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SikkerDigitalPostAdresse">
+    <xs:sequence>
+      <xs:element type="tns:postkasseadresse" name="postkasseadresse"/>
+      <xs:element type="tns:postkasseleverandoerAdresse" name="postkasseleverandoerAdresse"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="postkasseadresse">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="8"/>
+      <xs:maxLength value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="postkasseleverandoerAdresse">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="8"/>
+      <xs:maxLength value="20"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Epostadresse">
+    <xs:simpleContent>
+      <xs:extension base="tns:epostadresse">
+        <xs:attribute type="xs:dateTime" name="sistOppdatert" use="optional"/>
+        <xs:attribute type="xs:dateTime" name="sistVerifisert" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="mobiltelefonnummer">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="8"/>
+      <xs:maxLength value="20"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="epostadresse">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="3"/>
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Mobiltelefonnummer">
+    <xs:simpleContent>
+      <xs:extension base="tns:mobiltelefonnummer">
+        <xs:attribute type="xs:dateTime" name="sistOppdatert" use="optional"/>
+        <xs:attribute type="xs:dateTime" name="sistVerifisert" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v5</con:endpoint></con:endpoints><con:operation id="8af57a6b-0b24-4177-bba9-5619b71fc19c" isOneWay="false" action="" name="HentEndringer" bindingOperationName="HentEndringer" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1823ee8c-e90d-425b-aa0e-6a35e6c1e8b9" name="Request 1" outgoingWss="out" incomingWss="in"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v5</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:ns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/14-05" xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+   <soap:Header/>
+   <soap:Body wsu:Id="id-FEE891021F3E2D36641449046189653117" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+      <ns:HentEndringerForespoersel fraEndringsNummer="0">
+         <!--1 or more repetitions:-->
+         <ns:informasjonsbehov>Kontaktinfo</ns:informasjonsbehov>
+      </ns:HentEndringerForespoersel>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02/oppslagstjeneste-16-02/HentEndringerRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="6643e65b-0632-4966-abda-40296aae2e35" isOneWay="false" action="" name="HentPersoner" bindingOperationName="HentPersoner" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="59afa563-6378-4c7c-b882-966540544082" name="Request 1" outgoingWss="out" incomingWss="in"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v5</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/14-05">
+   <soap:Header/>
+   <soap:Body>
+      <ns:HentPersonerForespoersel>
+         <!--1 or more repetitions:-->
+         <ns:informasjonsbehov>Kontaktinfo</ns:informasjonsbehov>
+         <!--1 to 1000 repetitions:-->
+         <ns:personidentifikator>23079420557</ns:personidentifikator>
+      </ns:HentPersonerForespoersel>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02/oppslagstjeneste-16-02/HentPersonerRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="edb3a332-0abf-4186-a150-6f9359e56e7d" isOneWay="false" action="" name="HentPrintSertifikat" bindingOperationName="HentPrintSertifikat" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c85494b5-b221-4db3-a1a4-4caa4bb89ea8" name="Request 1" outgoingWss="out" incomingWss="in"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v5</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/14-05">
+   <soap:Header/>
+   <soap:Body>
+      <ns:HentPrintSertifikatForespoersel/>
+   </soap:Body>
+</soap:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02/oppslagstjeneste-16-02/HentPrintSertifikatRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer><con:crypto><con:source>C:/develop/sdp/kontaktregisteret-klient/SoapUI/kontaktinfo-client-test.jks</con:source><con:password>changeit</con:password><con:type>KEYSTORE</con:type><con:defaultAlias>buypass</con:defaultAlias><con:aliasPassword>changeit</con:aliasPassword></con:crypto><con:incoming><con:name>in</con:name><con:decryptCrypto>kontaktinfo-client-test.jks</con:decryptCrypto><con:signatureCrypto>kontaktinfo-client-test.jks</con:signatureCrypto><con:decryptPassword>changeit</con:decryptPassword></con:incoming><con:outgoing><con:name>out</con:name><con:password>changeit</con:password><con:entry type="Timestamp"><con:configuration><timeToLive>2000</timeToLive><strictTimestamp>true</strictTimestamp></con:configuration></con:entry><con:entry type="Signature" username="buypass" password="changeit"><con:configuration><crypto>kontaktinfo-client-test.jks</crypto><keyIdentifierType>3</keyIdentifierType><signatureAlgorithm>http://www.w3.org/2001/04/xmldsig-more#rsa-sha256</signatureAlgorithm><signatureCanonicalization>http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments</signatureCanonicalization><useSingleCert>false</useSingleCert><digestAlgorithm>http://www.w3.org/2001/04/xmlenc#sha256</digestAlgorithm><customTokenValueType/><customTokenId/><signaturePart>&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="id" value=""/>
+  &lt;con:entry key="name" value="Timestamp"/>
+  &lt;con:entry key="namespace" value="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"/>
+&lt;/xml-fragment></signaturePart><signaturePart>&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="id" value=""/>
+  &lt;con:entry key="name" value="Body"/>
+  &lt;con:entry key="namespace" value="http://www.w3.org/2003/05/soap-envelope"/>
+&lt;/xml-fragment></signaturePart></con:configuration></con:entry></con:outgoing></con:wssContainer><con:oAuth2ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
