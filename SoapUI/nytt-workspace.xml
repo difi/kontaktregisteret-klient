@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-workspace name="nytt" soapui-version="4.5.1" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings/>
+  <con:project name="Oppslagstjenesten V4">C:/kildekode/kontaktregister-klient/SoapUI/Kontaktinfo-WS-soapui-project V4 Working.xml</con:project>
+  <con:project name="Oppslagstjenesten V5">C:/kildekode/kontaktregister-klient/SoapUI/OppslagstjenestenV5.xml</con:project>
+</con:soapui-workspace>

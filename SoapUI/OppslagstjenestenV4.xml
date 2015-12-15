@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="Oppslagstjenesten V4" resourceRoot="${projectDir}" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.TestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Environment" value="Default"/>
+  <con:entry key="Global Properties" value=""/>
+  <con:entry key="TestSuite" value="MainTS"/>
+  <con:entry key="Report to Generate" value=""/>
+  <con:entry key="Password" value=""/>
+  <con:entry key="soapui-setings.xml Password" value=""/>
+  <con:entry key="TestRunner Path" value=""/>
+  <con:entry key="Tool Args" value=""/>
+  <con:entry key="Ignore Errors" value="false"/>
+  <con:entry key="Host:Port" value=""/>
+  <con:entry key="WSS Password Type" value=""/>
+  <con:entry key="Save Project" value="false"/>
+  <con:entry key="Enable UI" value="false"/>
+  <con:entry key="System Properties" value=""/>
+  <con:entry key="Domain" value=""/>
+  <con:entry key="Coverage Report" value="false"/>
+  <con:entry key="Export JUnit Results" value="false"/>
+  <con:entry key="Open Report" value="false"/>
+  <con:entry key="Project Properties" value=""/>
+  <con:entry key="Project Password" value=""/>
+  <con:entry key="Export All" value="false"/>
+  <con:entry key="Report Format(s)" value=""/>
+  <con:entry key="TestCase" value="hentKontaktinfo"/>
+  <con:entry key="Print Report" value="false"/>
+  <con:entry key="Username" value=""/>
+  <con:entry key="Root Folder" value=""/>
+  <con:entry key="Save After" value="false"/>
+  <con:entry key="Add Settings" value="false"/>
+  <con:entry key="Endpoint" value=""/>
+</xml-fragment>]]></con:setting></con:settings><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="oppslagstjeneste-14-05_SOAP11Binding" type="wsdl" bindingName="{http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-14-05}oppslagstjeneste-14-05_SOAP11Binding" soapVersion="1_1" anonymous="optional" definition="http://l-kons-aos-m92p.difi.local:8080/kontaktinfo-web-external/ws-v3/oppslagstjeneste-14-05.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://l-kons-aos-m92p.difi.local:8080/kontaktinfo-web-external/ws-v3/oppslagstjeneste-14-05.wsdl"><con:part><con:url>http://l-kons-aos-m92p.difi.local:8080/kontaktinfo-web-external/ws-v3/oppslagstjeneste-14-05.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="kontaktinfo-oppslagstjeneste-14-05" targetNamespace="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-14-05" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ot14-05="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/14-05" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-14-05" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/14-05" schemaLocation="oppslagstjeneste-ws-14-05.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="HentEndringerForespoersel">
+    <wsdl:part element="ot14-05:HentEndringerForespoersel" name="HentEndringerForespoersel"/>
+  </wsdl:message>
+  <wsdl:message name="HentEndringerRespons">
+    <wsdl:part element="ot14-05:HentEndringerRespons" name="HentEndringerRespons"/>
+  </wsdl:message>
+  <wsdl:message name="HentPersonerForespoersel">
+    <wsdl:part element="ot14-05:HentPersonerForespoersel" name="HentPersonerForespoersel"/>
+  </wsdl:message>
+  <wsdl:message name="HentPersonerRespons">
+    <wsdl:part element="ot14-05:HentPersonerRespons" name="HentPersonerRespons"/>
+  </wsdl:message>
+  <wsdl:message name="HentPrintSertifikatForespoersel">
+    <wsdl:part element="ot14-05:HentPrintSertifikatForespoersel" name="HentPrintSertifikatForespoersel"/>
+  </wsdl:message>
+  <wsdl:message name="HentPrintSertifikatRespons">
+    <wsdl:part element="ot14-05:HentPrintSertifikatRespons" name="HentPrintSertifikatRespons"/>
+  </wsdl:message>
+  <wsdl:portType name="oppslagstjeneste-14-05">
+    <wsdl:operation name="HentEndringer">
+      <wsdl:input message="tns:HentEndringerForespoersel"/>
+      <wsdl:output message="tns:HentEndringerRespons"/>
+    </wsdl:operation>
+    <wsdl:operation name="HentPersoner">
+      <wsdl:input message="tns:HentPersonerForespoersel"/>
+      <wsdl:output message="tns:HentPersonerRespons"/>
+    </wsdl:operation>
+    <wsdl:operation name="HentPrintSertifikat">
+      <wsdl:input message="tns:HentPrintSertifikatForespoersel"/>
+      <wsdl:output message="tns:HentPrintSertifikatRespons"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="oppslagstjeneste-14-05_SOAP11Binding" type="tns:oppslagstjeneste-14-05">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="HentEndringer">
+      <soap:operation soapAction=""/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HentPersoner">
+      <soap:operation soapAction=""/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HentPrintSertifikat">
+      <soap:operation soapAction=""/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="oppslagstjeneste-14-05">
+    <wsdl:port binding="tns:oppslagstjeneste-14-05_SOAP11Binding" name="oppslagstjeneste">
+      <soap:address location="http://l-kons-aos-m92p.difi.local:8080/kontaktinfo-web-external/ws-v3"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://l-kons-aos-m92p.difi.local:8080/kontaktinfo-web-external/ws-v3/oppslagstjeneste-ws-14-05.xsd</con:url><con:content><![CDATA[<xs:schema elementFormDefault="qualified" targetNamespace="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/14-05" version="3.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:m="http://begrep.difi.no" xmlns:sawsdl="http://www.w3.org/ns/sawsdl" xmlns:tns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/14-05">
+  <xs:import namespace="http://begrep.difi.no" schemaLocation="oppslagstjeneste-metadata-14-05.xsd"/>
+  <xs:annotation>
+    <xs:appinfo>Oppslagstjenesten - Webtjeneste</xs:appinfo>
+    <xs:documentation xml:lang="nb">Skjemaet definerer elementer i webtjeneste for Oppslagstjenesten Digitalt kontakt- og reservasjonsregister.</xs:documentation>
+  </xs:annotation>
+  <xs:element name="HentPersonerForespoersel" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/HentPersonerForespoersel.html">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="informasjonsbehov" type="tns:informasjonsbehov"/>
+        <xs:element maxOccurs="1000" minOccurs="1" name="personidentifikator" type="m:personidentifikator"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HentPersonerRespons" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/HentPersonerRespons.html">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="1000" minOccurs="1" ref="m:Person"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HentEndringerForespoersel" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/HentEndringerForespoersel.html">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="informasjonsbehov" type="tns:informasjonsbehov"/>
+      </xs:sequence>
+      <xs:attribute name="fraEndringsNummer" type="tns:fraEndringsNummer" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="fraEndringsNummer" sawsdl:modelReference="http://begrep.difi.no/Felles/fraEndringsNummer.html">
+    <xs:restriction base="xs:long"/>
+  </xs:simpleType>
+  <xs:simpleType name="tilEndringsNummer" sawsdl:modelReference="http://begrep.difi.no/Felles/tilEndringsNummer.html">
+    <xs:restriction base="xs:long"/>
+  </xs:simpleType>
+  <xs:simpleType name="senesteEndringsNummer" sawsdl:modelReference="http://begrep.difi.no/Felles/senesteEndringsNummer.html">
+    <xs:restriction base="xs:long"/>
+  </xs:simpleType>
+  <xs:element name="HentEndringerRespons" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/HentEndringerRespons.html">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="1000" minOccurs="0" ref="m:Person"/>
+      </xs:sequence>
+      <xs:attribute name="fraEndringsNummer" type="tns:fraEndringsNummer" use="required"/>
+      <xs:attribute name="tilEndringsNummer" type="tns:tilEndringsNummer" use="required"/>
+      <xs:attribute name="senesteEndringsNummer" type="tns:senesteEndringsNummer" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="informasjonsbehov" sawsdl:modelReference="http://begrep.difi.no/Felles/informasjonsbehov.html">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Person"/>
+      <xs:enumeration value="Kontaktinfo"/>
+      <xs:enumeration value="Sertifikat"/>
+      <xs:enumeration value="SikkerDigitalPost"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="HentPrintSertifikatForespoersel" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/HentPrintSertifikatForespoersel.html">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="HentPrintSertifikatRespons" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/HentPrintSertifikatRespons.html">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="1" minOccurs="1" name="postkasseleverandorAdresse" type="xs:string"/>
+        <xs:element maxOccurs="1" minOccurs="1" name="X509Certificate" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://l-kons-aos-m92p.difi.local:8080/kontaktinfo-web-external/ws-v3/oppslagstjeneste-metadata-14-05.xsd</con:url><con:content><![CDATA[<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://begrep.difi.no" xsi:schemaLocation="http://www.w3.org/2000/09/xmldsig# http://www.w3.org/TR/2002/REC-xmldsig-core-20020212/xmldsig-core-schema.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:sawsdl="http://www.w3.org/ns/sawsdl" xmlns:tns="http://begrep.difi.no" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd"/>
+  <xs:annotation>
+    <xs:appinfo>Metadata for Oppslagstjenesten</xs:appinfo>
+    <xs:documentation xml:lang="nb">Definisjon av XML-typer benyttet i webtjeneste-grensesnitt.</xs:documentation>
+  </xs:annotation>
+  <xs:element name="Person" type="tns:Person"/>
+  <xs:complexType name="Person" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/Person.html">
+    <xs:sequence>
+      <xs:element name="personidentifikator" type="tns:personidentifikator"/>
+      <xs:element minOccurs="0" name="reservasjon" type="tns:reservasjon"/>
+      <xs:element minOccurs="0" name="status" type="tns:status"/>
+      <xs:element minOccurs="0" name="beskrivelse" type="tns:beskrivelse"/>
+      <xs:element minOccurs="0" name="Kontaktinformasjon" type="tns:Kontaktinformasjon"/>
+      <xs:element minOccurs="0" name="SikkerDigitalPostAdresse" type="tns:SikkerDigitalPostAdresse"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="X509Certificate" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="personidentifikator" sawsdl:modelReference="http://begrep.difi.no/Felles/personidentifikator.html">
+    <xs:restriction base="xs:string">
+      <xs:length value="11"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="status" sawsdl:modelReference="http://begrep.difi.no/Felles/status.html">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AKTIV"/>
+      <xs:enumeration value="SLETTET"/>
+      <xs:enumeration value="IKKE_REGISTRERT"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="beskrivelse" sawsdl:modelReference="http://begrep.difi.local/Felles/beskrivelse.html">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:simpleType name="reservasjon" sawsdl:modelReference="http://begrep.difi.no/Felles/reservasjon.html">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="JA"/>
+      <xs:enumeration value="NEI"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Kontaktinformasjon" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/Kontaktinformasjon.html">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Mobiltelefonnummer" type="tns:Mobiltelefonnummer"/>
+      <xs:element minOccurs="0" name="Epostadresse" type="tns:Epostadresse"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SikkerDigitalPostAdresse" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/SikkerDigitalPostAdresse.html">
+    <xs:sequence>
+      <xs:element name="postkasseadresse" type="tns:postkasseadresse"/>
+      <xs:element name="postkasseleverandoerAdresse" type="tns:postkasseleverandoerAdresse"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="postkasseadresse" sawsdl:modelReference="http://begrep.difi.no/Felles/postkasseadresse.html">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:simpleType name="postkasseleverandoerAdresse" sawsdl:modelReference="http://begrep.difi.no/Felles/postkasseleverandoerAdresse.html">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:complexType name="Epostadresse" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/Epostadresse.html">
+    <xs:simpleContent>
+      <xs:extension base="tns:epostadresse">
+        <xs:attribute name="sistOppdatert" sawsdl:modelReference="http://begrep.difi.no/Felles/sistOppdatert.html" type="xs:dateTime" use="required"/>
+        <xs:attribute name="sistVerifisert" sawsdl:modelReference="http://begrep.difi.no/Felles/sistVerifisert.html" type="xs:dateTime" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="mobiltelefonnummer" sawsdl:modelReference="http://begrep.difi.no/Felles/mobiltelefonnummer.html">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="8"/>
+      <xs:maxLength value="20"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="epostadresse" sawsdl:modelReference="http://begrep.difi.no/Felles/epostadresse.html">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="3"/>
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Mobiltelefonnummer" sawsdl:modelReference="http://begrep.difi.no/Oppslagstjenesten/Mobiltelefonnummer.html">
+    <xs:simpleContent>
+      <xs:extension base="tns:mobiltelefonnummer">
+        <xs:attribute name="sistOppdatert" sawsdl:modelReference="http://begrep.difi.no/Felles/sistOppdatert.html" type="xs:dateTime" use="required"/>
+        <xs:attribute name="sistVerifisert" sawsdl:modelReference="http://begrep.difi.no/Felles/sistVerifisert.html" type="xs:dateTime" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd</con:url><con:content><![CDATA[<!DOCTYPE schema PUBLIC "-//W3C//DTD XMLSchema 200102//EN" "http://www.w3.org/2001/XMLSchema.dtd">
+<!--Schema for XML Signatures
+    http://www.w3.org/2000/09/xmldsig#
+    $Revision: 1.1 $ on $Date: 2002/02/08 20:32:26 $ by $Author: reagle $
+
+    Copyright 2001 The Internet Society and W3C (Massachusetts Institute
+    of Technology, Institut National de Recherche en Informatique et en
+    Automatique, Keio University). All Rights Reserved.
+    http://www.w3.org/Consortium/Legal/
+
+    This document is governed by the W3C Software License [1] as described
+    in the FAQ [2].
+
+    [1] http://www.w3.org/Consortium/Legal/copyright-software-19980720
+    [2] http://www.w3.org/Consortium/Legal/IPR-FAQ-20000620.html#DTD-->
+<schema targetNamespace="http://www.w3.org/2000/09/xmldsig#" version="0.1" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+  <!--Basic Types Defined for Signatures-->
+  <simpleType name="CryptoBinary">
+    <restriction base="base64Binary"></restriction>
+  </simpleType>
+  <!--Start Signature-->
+  <element name="Signature" type="ds:SignatureType"/>
+  <complexType name="SignatureType">
+    <sequence>
+      <element ref="ds:SignedInfo"/>
+      <element ref="ds:SignatureValue"/>
+      <element ref="ds:KeyInfo" minOccurs="0"/>
+      <element ref="ds:Object" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="Id" type="ID" use="optional"/>
+  </complexType>
+  <element name="SignatureValue" type="ds:SignatureValueType"/>
+  <complexType name="SignatureValueType">
+    <simpleContent>
+      <extension base="base64Binary">
+        <attribute name="Id" type="ID" use="optional"/>
+      </extension>
+    </simpleContent>
+  </complexType>
+  <!--Start SignedInfo-->
+  <element name="SignedInfo" type="ds:SignedInfoType"/>
+  <complexType name="SignedInfoType">
+    <sequence>
+      <element ref="ds:CanonicalizationMethod"/>
+      <element ref="ds:SignatureMethod"/>
+      <element ref="ds:Reference" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="Id" type="ID" use="optional"/>
+  </complexType>
+  <element name="CanonicalizationMethod" type="ds:CanonicalizationMethodType"/>
+  <complexType name="CanonicalizationMethodType" mixed="true">
+    <sequence>
+      <any namespace="##any" minOccurs="0" maxOccurs="unbounded"/>
+      <!--(0,unbounded) elements from (1,1) namespace-->
+    </sequence>
+    <attribute name="Algorithm" type="anyURI" use="required"/>
+  </complexType>
+  <element name="SignatureMethod" type="ds:SignatureMethodType"/>
+  <complexType name="SignatureMethodType" mixed="true">
+    <sequence>
+      <element name="HMACOutputLength" minOccurs="0" type="ds:HMACOutputLengthType"/>
+      <any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+      <!--(0,unbounded) elements from (1,1) external namespace-->
+    </sequence>
+    <attribute name="Algorithm" type="anyURI" use="required"/>
+  </complexType>
+  <!--Start Reference-->
+  <element name="Reference" type="ds:ReferenceType"/>
+  <complexType name="ReferenceType">
+    <sequence>
+      <element ref="ds:Transforms" minOccurs="0"/>
+      <element ref="ds:DigestMethod"/>
+      <element ref="ds:DigestValue"/>
+    </sequence>
+    <attribute name="Id" type="ID" use="optional"/>
+    <attribute name="URI" type="anyURI" use="optional"/>
+    <attribute name="Type" type="anyURI" use="optional"/>
+  </complexType>
+  <element name="Transforms" type="ds:TransformsType"/>
+  <complexType name="TransformsType">
+    <sequence>
+      <element ref="ds:Transform" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <element name="Transform" type="ds:TransformType"/>
+  <complexType name="TransformType" mixed="true">
+    <choice minOccurs="0" maxOccurs="unbounded">
+      <any namespace="##other" processContents="lax"/>
+      <!--(1,1) elements from (0,unbounded) namespaces-->
+      <element name="XPath" type="string"/>
+    </choice>
+    <attribute name="Algorithm" type="anyURI" use="required"/>
+  </complexType>
+  <!--End Reference-->
+  <element name="DigestMethod" type="ds:DigestMethodType"/>
+  <complexType name="DigestMethodType" mixed="true">
+    <sequence>
+      <any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="Algorithm" type="anyURI" use="required"/>
+  </complexType>
+  <element name="DigestValue" type="ds:DigestValueType"/>
+  <simpleType name="DigestValueType">
+    <restriction base="base64Binary"/>
+  </simpleType>
+  <!--End SignedInfo-->
+  <!--Start KeyInfo-->
+  <element name="KeyInfo" type="ds:KeyInfoType"/>
+  <complexType name="KeyInfoType" mixed="true">
+    <choice maxOccurs="unbounded">
+      <element ref="ds:KeyName"/>
+      <element ref="ds:KeyValue"/>
+      <element ref="ds:RetrievalMethod"/>
+      <element ref="ds:X509Data"/>
+      <element ref="ds:PGPData"/>
+      <element ref="ds:SPKIData"/>
+      <element ref="ds:MgmtData"/>
+      <any processContents="lax" namespace="##other"/>
+      <!--(1,1) elements from (0,unbounded) namespaces-->
+    </choice>
+    <attribute name="Id" type="ID" use="optional"/>
+  </complexType>
+  <element name="KeyName" type="string"/>
+  <element name="MgmtData" type="string"/>
+  <element name="KeyValue" type="ds:KeyValueType"/>
+  <complexType name="KeyValueType" mixed="true">
+    <choice>
+      <element ref="ds:DSAKeyValue"/>
+      <element ref="ds:RSAKeyValue"/>
+      <any namespace="##other" processContents="lax"/>
+    </choice>
+  </complexType>
+  <element name="RetrievalMethod" type="ds:RetrievalMethodType"/>
+  <complexType name="RetrievalMethodType">
+    <sequence>
+      <element ref="ds:Transforms" minOccurs="0"/>
+    </sequence>
+    <attribute name="URI" type="anyURI"/>
+    <attribute name="Type" type="anyURI" use="optional"/>
+  </complexType>
+  <!--Start X509Data-->
+  <element name="X509Data" type="ds:X509DataType"/>
+  <complexType name="X509DataType">
+    <sequence maxOccurs="unbounded">
+      <choice>
+        <element name="X509IssuerSerial" type="ds:X509IssuerSerialType"/>
+        <element name="X509SKI" type="base64Binary"/>
+        <element name="X509SubjectName" type="string"/>
+        <element name="X509Certificate" type="base64Binary"/>
+        <element name="X509CRL" type="base64Binary"/>
+        <any namespace="##other" processContents="lax"/>
+      </choice>
+    </sequence>
+  </complexType>
+  <complexType name="X509IssuerSerialType">
+    <sequence>
+      <element name="X509IssuerName" type="string"/>
+      <element name="X509SerialNumber" type="integer"/>
+    </sequence>
+  </complexType>
+  <!--End X509Data-->
+  <!--Begin PGPData-->
+  <element name="PGPData" type="ds:PGPDataType"/>
+  <complexType name="PGPDataType">
+    <choice>
+      <sequence>
+        <element name="PGPKeyID" type="base64Binary"/>
+        <element name="PGPKeyPacket" type="base64Binary" minOccurs="0"/>
+        <any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+      </sequence>
+      <sequence>
+        <element name="PGPKeyPacket" type="base64Binary"/>
+        <any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+      </sequence>
+    </choice>
+  </complexType>
+  <!--End PGPData-->
+  <!--Begin SPKIData-->
+  <element name="SPKIData" type="ds:SPKIDataType"/>
+  <complexType name="SPKIDataType">
+    <sequence maxOccurs="unbounded">
+      <element name="SPKISexp" type="base64Binary"/>
+      <any namespace="##other" processContents="lax" minOccurs="0"/>
+    </sequence>
+  </complexType>
+  <!--End SPKIData-->
+  <!--End KeyInfo-->
+  <!--Start Object (Manifest, SignatureProperty)-->
+  <element name="Object" type="ds:ObjectType"/>
+  <complexType name="ObjectType" mixed="true">
+    <sequence minOccurs="0" maxOccurs="unbounded">
+      <any namespace="##any" processContents="lax"/>
+    </sequence>
+    <attribute name="Id" type="ID" use="optional"/>
+    <attribute name="MimeType" type="string" use="optional"/>
+    <!--add a grep facet-->
+    <attribute name="Encoding" type="anyURI" use="optional"/>
+  </complexType>
+  <element name="Manifest" type="ds:ManifestType"/>
+  <complexType name="ManifestType">
+    <sequence>
+      <element ref="ds:Reference" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="Id" type="ID" use="optional"/>
+  </complexType>
+  <element name="SignatureProperties" type="ds:SignaturePropertiesType"/>
+  <complexType name="SignaturePropertiesType">
+    <sequence>
+      <element ref="ds:SignatureProperty" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="Id" type="ID" use="optional"/>
+  </complexType>
+  <element name="SignatureProperty" type="ds:SignaturePropertyType"/>
+  <complexType name="SignaturePropertyType" mixed="true">
+    <choice maxOccurs="unbounded">
+      <any namespace="##other" processContents="lax"/>
+      <!--(1,1) elements from (1,unbounded) namespaces-->
+    </choice>
+    <attribute name="Target" type="anyURI" use="required"/>
+    <attribute name="Id" type="ID" use="optional"/>
+  </complexType>
+  <!--End Object (Manifest, SignatureProperty)-->
+  <!--Start Algorithm Parameters-->
+  <simpleType name="HMACOutputLengthType">
+    <restriction base="integer"/>
+  </simpleType>
+  <!--Start KeyValue Element-types-->
+  <element name="DSAKeyValue" type="ds:DSAKeyValueType"/>
+  <complexType name="DSAKeyValueType">
+    <sequence>
+      <sequence minOccurs="0">
+        <element name="P" type="ds:CryptoBinary"/>
+        <element name="Q" type="ds:CryptoBinary"/>
+      </sequence>
+      <element name="G" type="ds:CryptoBinary" minOccurs="0"/>
+      <element name="Y" type="ds:CryptoBinary"/>
+      <element name="J" type="ds:CryptoBinary" minOccurs="0"/>
+      <sequence minOccurs="0">
+        <element name="Seed" type="ds:CryptoBinary"/>
+        <element name="PgenCounter" type="ds:CryptoBinary"/>
+      </sequence>
+    </sequence>
+  </complexType>
+  <element name="RSAKeyValue" type="ds:RSAKeyValueType"/>
+  <complexType name="RSAKeyValueType">
+    <sequence>
+      <element name="Modulus" type="ds:CryptoBinary"/>
+      <element name="Exponent" type="ds:CryptoBinary"/>
+    </sequence>
+  </complexType>
+  <!--End KeyValue Element-types-->
+  <!--End Signature-->
+</schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v4</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="HentEndringer" bindingOperationName="HentEndringer" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss="trusted" incomingWss="default"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v4</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/14-05">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:HentEndringerForespoersel fraEndringsNummer="0">
+         <!--1 or more repetitions:-->
+         <ns:informasjonsbehov>Sertifikat</ns:informasjonsbehov>
+      </ns:HentEndringerForespoersel>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-14-05/oppslagstjeneste-14-05/HentEndringerRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="HentPersoner" bindingOperationName="HentPersoner" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss="trusted" incomingWss="default"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v4</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/14-05">
+         <soapenv:Header>
+         <ns:DifiSecurity>
+            <ns:OnBehalfOf>991495304</ns:OnBehalfOf>
+         </ns:DifiSecurity>
+	</soapenv:Header>
+   <soapenv:Body>
+      <ns:HentPersonerForespoersel>
+         <!--1 or more repetitions:-->
+         <ns:informasjonsbehov>Kontaktinfo</ns:informasjonsbehov>
+
+         
+         <!--1 to 1000 repetitions:-->
+         <ns:personidentifikator>01010317467</ns:personidentifikator>
+          <ns:personidentifikator>01010750241</ns:personidentifikator>
+          <ns:personidentifikator>28128046900</ns:personidentifikator>
+          
+      </ns:HentPersonerForespoersel>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-14-05/oppslagstjeneste-14-05/HentPersonerRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="HentPrintSertifikat" bindingOperationName="HentPrintSertifikat" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1" outgoingWss="trusted" incomingWss="default"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v4</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/14-05">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:HentPrintSertifikatForespoersel/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-14-05/oppslagstjeneste-14-05/HentPrintSertifikatRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties><con:property><con:name>ssnGeneralConsented</con:name><con:value>20098615629</con:value></con:property><con:property><con:name>ssnNotConsented</con:name><con:value>20098619721</con:value></con:property><con:property><con:name>ssnSpecificConsented</con:name><con:value>26048448282</con:value></con:property><con:property><con:name>ssnConsentRejected</con:name><con:value>26048448363</con:value></con:property><con:property><con:name>ssnNotRegistered</con:name><con:value>26048448363</con:value></con:property><con:property><con:name>serviceOwnerName</con:name><con:value>testsp1-dig</con:value></con:property><con:property><con:name>namespace</con:name><con:value>http://kontaktinfo.difi.no/xsd/kontaktinfo/201210</con:value></con:property><con:property><con:name>nsprefix</con:name><con:value>ns3</con:value></con:property><con:property><con:name>endpoint-v4</con:name><con:value>https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v4</con:value></con:property></con:properties><con:wssContainer><con:crypto><con:source>kontaktinfo-client-test.jks</con:source><con:password>changeit</con:password><con:type>KEYSTORE</con:type></con:crypto><con:incoming><con:name>default</con:name><con:decryptCrypto>kontaktinfo-client-test.jks</con:decryptCrypto><con:signatureCrypto>kontaktinfo-client-test.jks</con:signatureCrypto><con:decryptPassword>changeit</con:decryptPassword></con:incoming><con:incoming><con:name>none</con:name></con:incoming><con:outgoing><con:name>trusted</con:name><con:username>trusted-client</con:username><con:password>changeit</con:password><con:entry type="Timestamp"><con:configuration><timeToLive>2000</timeToLive><strictTimestamp>true</strictTimestamp></con:configuration></con:entry><con:entry type="Signature" username="buypass"><con:configuration><crypto>kontaktinfo-client-test.jks</crypto><keyIdentifierType>3</keyIdentifierType><signatureAlgorithm>http://www.w3.org/2000/09/xmldsig#rsa-sha1</signatureAlgorithm><signatureCanonicalization>http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments</signatureCanonicalization><useSingleCert>false</useSingleCert><digestAlgorithm>http://www.w3.org/2000/09/xmldsig#sha1</digestAlgorithm><signaturePart>&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="id" value=""/>
+  &lt;con:entry key="name" value="Timestamp"/>
+  &lt;con:entry key="namespace" value="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"/>
+&lt;/xml-fragment></signaturePart><signaturePart>&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="id" value=""/>
+  &lt;con:entry key="name" value="Body"/>
+  &lt;con:entry key="namespace" value="http://schemas.xmlsoap.org/soap/envelope/"/>
+&lt;/xml-fragment></signaturePart></con:configuration></con:entry></con:outgoing><con:outgoing actor=""><con:name>untrusted</con:name><con:username>untrusted-client</con:username><con:password>changeit</con:password><con:entry type="Signature" username="untrusted-client"><con:configuration><crypto>kontaktinfo-client-test.jks</crypto><keyIdentifierType>3</keyIdentifierType><signatureAlgorithm>http://www.w3.org/2000/09/xmldsig#rsa-sha1</signatureAlgorithm><signatureCanonicalization>http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments</signatureCanonicalization><useSingleCert>false</useSingleCert><digestAlgorithm>http://www.w3.org/2000/09/xmldsig#sha1</digestAlgorithm></con:configuration></con:entry><con:entry type="Timestamp"><con:configuration><timeToLive>200000</timeToLive><strictTimestamp>true</strictTimestamp></con:configuration></con:entry></con:outgoing><con:outgoing><con:name>none</con:name><con:username>test</con:username><con:password>test</con:password></con:outgoing><con:outgoing><con:name>newclient</con:name><con:username>new-client</con:username><con:password>changeit</con:password><con:entry type="Signature"><con:configuration><crypto>kontaktinfo-client-test.jks</crypto><keyIdentifierType>3</keyIdentifierType><signatureAlgorithm>http://www.w3.org/2000/09/xmldsig#rsa-sha1</signatureAlgorithm><signatureCanonicalization>http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments</signatureCanonicalization><useSingleCert>false</useSingleCert><digestAlgorithm>http://www.w3.org/2000/09/xmldsig#sha1</digestAlgorithm></con:configuration></con:entry><con:entry type="Timestamp"><con:configuration><timeToLive>2000</timeToLive><strictTimestamp>true</strictTimestamp></con:configuration></con:entry></con:outgoing><con:outgoing><con:name>trusted-notimestamp</con:name><con:username>trusted-client</con:username><con:password>changeit</con:password><con:entry type="Signature"><con:configuration><crypto>kontaktinfo-client-test.jks</crypto><keyIdentifierType>3</keyIdentifierType><signatureAlgorithm>http://www.w3.org/2000/09/xmldsig#rsa-sha1</signatureAlgorithm><signatureCanonicalization>http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments</signatureCanonicalization><useSingleCert>false</useSingleCert><digestAlgorithm>http://www.w3.org/2000/09/xmldsig#sha1</digestAlgorithm></con:configuration></con:entry></con:outgoing></con:wssContainer><con:databaseConnectionContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:sensitiveInformation><ProjectSpecificExposureList>null###null</ProjectSpecificExposureList></con:sensitiveInformation></con:soapui-project>
