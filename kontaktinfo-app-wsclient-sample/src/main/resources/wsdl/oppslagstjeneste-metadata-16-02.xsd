@@ -20,7 +20,7 @@
             <xs:element type="tns:personidentifikator" name="personidentifikator"/>
             <xs:element type="tns:reservasjon" name="reservasjon" minOccurs="0"/>
             <xs:element type="tns:status" name="status" minOccurs="0"/>
-            <xs:element type="tns:beskrivelse" name="beskrivelse" minOccurs="0" />
+            <xs:element type="tns:varslingsstatus" name="varslingsstatus" minOccurs="0"/>
             <xs:element type="tns:Kontaktinformasjon" name="Kontaktinformasjon" minOccurs="0" />
             <xs:element type="tns:SikkerDigitalPostAdresse" name="SikkerDigitalPostAdresse" minOccurs="0" />
             <xs:element name="X509Sertifikat" type="tns:X509Sertifikat" minOccurs="0" maxOccurs="1" />
@@ -37,6 +37,13 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="varslingsstatus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="KAN_IKKE_VARSLES"/>
+            <xs:enumeration value="KAN_VARSLES"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="status">
         <xs:restriction base="xs:string">
             <xs:enumeration value="AKTIV"/>
@@ -44,12 +51,9 @@
             <xs:enumeration value="IKKE_REGISTRERT"/>
         </xs:restriction>
     </xs:simpleType>
+
     
 	<xs:simpleType name="postkasseleverandoerOrgNummer">
-        <xs:restriction base="xs:string" />
-    </xs:simpleType>
-
-    <xs:simpleType name="beskrivelse">
         <xs:restriction base="xs:string" />
     </xs:simpleType>
 

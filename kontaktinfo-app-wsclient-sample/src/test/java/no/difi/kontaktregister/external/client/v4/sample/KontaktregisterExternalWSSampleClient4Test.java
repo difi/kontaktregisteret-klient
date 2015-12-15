@@ -3,10 +3,10 @@ package no.difi.kontaktregister.external.client.v4.sample;
 import no.difi.kontaktinfo.external.client.cxf.WSS4JInterceptorHelper;
 
 
-import no.difi.kontaktinfo.wsdl.oppslagstjeneste_14_05.Oppslagstjeneste1405;
 
-import no.difi.kontaktinfo.xsd.oppslagstjeneste._14_05.*;
+import no.difi.kontaktinfo.wsdl.oppslagstjeneste_16_02.Oppslagstjeneste1602;
 
+import no.difi.kontaktinfo.xsd.oppslagstjeneste._16_02.*;
 import org.apache.cxf.configuration.jsse.TLSClientParameters;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
@@ -22,13 +22,13 @@ import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.*;
 
 /**
- * Sample client tests to demonstrate how to set up and use: Kontaktinfo webservice v3 / Oppslagstjenesten for kontakt- og reservasjonsregisteret v3.
+ * Sample client tests to demonstrate how to set up and use: Kontaktinfo webservice v5 / Oppslagstjenesten for kontakt- og reservasjonsregisteret v5.
  *
- * @see <a href="https://kontaktinfo-ws.difi.no/kontaktinfo-external/dok/v1">https://kontaktinfo-ws.difi.no/kontaktinfo-external/dok/v1</a>
+ * @see <a href="https://begrep.difi.no/">https://begrep.difi.no/</a>
  */
 public class KontaktregisterExternalWSSampleClient4Test {
 
-    private static Oppslagstjeneste1405 kontaktinfoPort;
+    private static Oppslagstjeneste1602 kontaktinfoPort;
 
     private static final String TEST_SSN_1 = "02018090573";
     private static final String TEST_SSN_2 = "02018090301";
@@ -38,17 +38,19 @@ public class KontaktregisterExternalWSSampleClient4Test {
     	// Optionally set system property "kontaktinfo.address.location" to override the default test endpoint
         String serviceAddress = System.getProperty("kontaktinfo.address.location");
         if(serviceAddress == null) {
-        	serviceAddress = "https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v4";
+        	//serviceAddress = "https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v5";
+            serviceAddress = "http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v5/";
         }
 
         // Enables running against alternative endpoints to the one specified in the WSDL
         JaxWsProxyFactoryBean jaxWsProxyFactoryBean = new JaxWsProxyFactoryBean();
-        jaxWsProxyFactoryBean.setServiceClass(Oppslagstjeneste1405.class);
+        jaxWsProxyFactoryBean.setServiceClass(Oppslagstjeneste1602.class);
         jaxWsProxyFactoryBean.setAddress(serviceAddress);
+        jaxWsProxyFactoryBean.setBindingId(javax.xml.ws.soap.SOAPBinding.SOAP12HTTP_BINDING);
         
         // Configures WS-Security
         WSS4JInterceptorHelper.addWSS4JInterceptors(jaxWsProxyFactoryBean);
-        kontaktinfoPort = (Oppslagstjeneste1405) jaxWsProxyFactoryBean.create();
+        kontaktinfoPort = (Oppslagstjeneste1602) jaxWsProxyFactoryBean.create();
         
         // Optionally set system property "kontaktinfo.ssl.disable" to disable SSL checks to enable running tests against endpoint with invalid SSL setup
         String disableSslChecks = System.getProperty("kontaktinfo.ssl.disable");
@@ -64,7 +66,7 @@ public class KontaktregisterExternalWSSampleClient4Test {
 
     @Test
     public void testHentKontaktSertifikat() {
-    	HentPrintSertifikatForespoersel print = new HentPrintSertifikatForespoersel(); 
+    	HentPrintSertifikatForespoersel print = new HentPrintSertifikatForespoersel();
     	HentPrintSertifikatRespons response = kontaktinfoPort.hentPrintSertifikat(print);
     	assertTrue(response.getPostkasseleverandoerAdresse().length() > 0);
     	assertTrue(response.getX509Sertifikat().length > 0);
