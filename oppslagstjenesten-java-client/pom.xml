@@ -2,12 +2,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>no.difi.kontaktinfo</groupId>
-	<artifactId>kontaktinfo-app-wsclient-sample</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<groupId>no.difi.oppslagstjenesten</groupId>
+	<artifactId>oppslagstjenesten-client-sample</artifactId>
+	<version>5-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Referanseimplementasjon for brukere av kontakt- og reservasjonsregisteret i offentlig sektor</name>
+	<name>Eksempel på implementasjon mot kontakt- og reservasjonsregisteret i offentlig sektor, versjon 5</name>
 	<url>https://github.com/difi/kontaktregisteret-klient</url>
 
 	<properties>
@@ -68,7 +68,7 @@
 							<wsdlOptions>
 								<wsdlOption>
                                     <wsdl>
-										${basedir}/src/main/resources/wsdl/oppslagstjeneste-ws-16-02.wsdl
+										${basedir}/src/test/resources/wsdl/oppslagstjeneste-ws-16-02.wsdl
 									</wsdl>
 								</wsdlOption>
 							</wsdlOptions>

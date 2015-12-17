@@ -1,0 +1,16 @@
+Innstallasjonsguide for Testklient av  Oppslagstjenesten
+
+Introduksjon
+Dette prosjektet inneholder eksempelkode på hvordan en soap-klient kan konfigureres for bruk mot oppslagstjenesten. Dette dokumentet beskriver de nødvendige stegene for å kjøre testklienten. Denne er satt opp med en integrasjon mot testmiljøet VER2 hos Difi. 
+En nærmere beskrivelse av oppslagstjenesten finnes på http://begrep.difi.no/Oppslagstjenesten/
+
+Nødvendige forutsetninger
+- Java-miljøet må være satt opp med Java Cryptography Extention (JCE) unlimited strength policies 
+
+Kjøring av applikasjon:
+Eksempelklienten er implementert som JUnit tester. Kjør følgende kommando: "mvn clean test".
+Det er mulig å hente ut informasjon via følgende 3 SOAP metoder;
+	- HentPersoner
+	- HentEndringer
+	- HentPrintSertifikat
+der samtlige er sikret med kryptering og signering (WS-S).

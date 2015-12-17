@@ -22,7 +22,7 @@ import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.*;
 
 /**
- * Sample client tests to demonstrate how to set up and use: Kontaktinfo webservice v5 / Oppslagstjenesten for kontakt- og reservasjonsregisteret v5.
+ * Sample client tests to demonstrate how to set up and use: Oppslagstjenesten for kontakt- og reservasjonsregisteret v5.
  *
  * @see <a href="https://begrep.difi.no/">https://begrep.difi.no/</a>
  */
