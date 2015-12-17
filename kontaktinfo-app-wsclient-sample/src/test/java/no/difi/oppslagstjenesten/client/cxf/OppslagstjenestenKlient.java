@@ -1,4 +1,4 @@
-package no.difi.kontaktinfo.external.client.cxf;
+package no.difi.oppslagstjenesten.client.cxf;
 
 import no.difi.kontaktinfo.wsdl.oppslagstjeneste_16_02.Oppslagstjeneste1602;
 import org.apache.cxf.configuration.jsse.TLSClientParameters;

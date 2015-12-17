@@ -1,6 +1,6 @@
-package no.difi.kontaktregister.external.client.v4.sample;
+package no.difi.oppslagstjenesten.client.v5;
 
-import no.difi.kontaktinfo.external.client.cxf.WSS4JInterceptorHelper;
+import no.difi.oppslagstjenesten.client.cxf.WSS4JInterceptorHelper;
 
 
 
@@ -26,7 +26,7 @@ import static org.junit.Assert.*;
  *
  * @see <a href="https://begrep.difi.no/">https://begrep.difi.no/</a>
  */
-public class KontaktregisterExternalWSSampleClient4Test {
+public class OppslagstjenestenV5ClientTest {
 
     private static Oppslagstjeneste1602 kontaktinfoPort;
 

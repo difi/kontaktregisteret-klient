@@ -1,4 +1,4 @@
-package no.difi.kontaktinfo.external.client.cxf;
+package no.difi.oppslagstjenesten.client.cxf;
 
 import org.apache.ws.security.WSPasswordCallback;
 
