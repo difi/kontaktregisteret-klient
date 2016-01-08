@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="43f5fdfa-193e-40f8-a1ce-fd1580ab4920" activeEnvironment="Default" name="oppslagstjeneste-ws-16-02" resourceRoot="" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="oppslagstjeneste-16-02_SOAP12Binding" type="wsdl" bindingName="{http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02}oppslagstjeneste-16-02_SOAP12Binding" soapVersion="1_2" anonymous="optional" definition="oppslagstjeneste-ws-16-02.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="oppslagstjeneste-ws-16-02.wsdl"><con:part><con:url>oppslagstjeneste-ws-16-02.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="kontaktinfo-oppslagstjeneste-16-02" targetNamespace="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02" xmlns:ot16-02="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02">
+<con:soapui-project id="43f5fdfa-193e-40f8-a1ce-fd1580ab4920" activeEnvironment="Default" name="oppslagstjeneste-ws-16-02" resourceRoot="" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="a3d723b0-ec57-4169-8005-c1fe003f4b66" wsaVersion="NONE" name="oppslagstjeneste-16-02_SOAP12Binding" type="wsdl" bindingName="{http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02}oppslagstjeneste-16-02_SOAP12Binding" soapVersion="1_2" anonymous="optional" definition="file:/C:/develop/sdp/kontaktregisteret-klient/SoapUI/oppslagstjeneste-ws-16-02.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/develop/sdp/kontaktregisteret-klient/SoapUI/oppslagstjeneste-ws-16-02.wsdl"><con:part><con:url>file:/C:/develop/sdp/kontaktregisteret-klient/SoapUI/oppslagstjeneste-ws-16-02.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="kontaktinfo-oppslagstjeneste-16-02" targetNamespace="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02" xmlns:ot16-02="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02">
   <wsdl:types>
     <xsd:schema>
       <xsd:import namespace="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02" schemaLocation="oppslagstjeneste-ws-16-02.xsd"/>
@@ -23,6 +23,9 @@
   <wsdl:message name="HentPrintSertifikatRespons">
     <wsdl:part name="HentPrintSertifikatRespons" element="ot16-02:HentPrintSertifikatRespons"/>
   </wsdl:message>
+  <wsdl:message name="OppslagstjenestenHeader">
+    <wsdl:part name="Oppslagstjenesten" element="ot16-02:Oppslagstjenesten"/>
+  </wsdl:message>
   <wsdl:portType name="oppslagstjeneste-16-02">
     <wsdl:operation name="HentEndringer">
       <wsdl:input message="tns:HentEndringerForespoersel"/>
@@ -42,6 +45,7 @@
     <wsdl:operation name="HentEndringer">
       <soap12:operation soapAction=""/>
       <wsdl:input>
+        <soap12:header message="tns:OppslagstjenestenHeader" part="Oppslagstjenesten" use="literal" wsdl:required="true"/>
         <soap12:body use="literal"/>
       </wsdl:input>
       <wsdl:output>
@@ -51,6 +55,7 @@
     <wsdl:operation name="HentPersoner">
       <soap12:operation soapAction=""/>
       <wsdl:input>
+        <soap12:header message="tns:OppslagstjenestenHeader" part="Oppslagstjenesten" use="literal" wsdl:required="true"/>
         <soap12:body use="literal"/>
       </wsdl:input>
       <wsdl:output>
@@ -60,6 +65,7 @@
     <wsdl:operation name="HentPrintSertifikat">
       <soap12:operation soapAction=""/>
       <wsdl:input>
+        <soap12:header message="tns:OppslagstjenestenHeader" part="Oppslagstjenesten" use="literal" wsdl:required="true"/>
         <soap12:body use="literal"/>
       </wsdl:input>
       <wsdl:output>
@@ -72,7 +78,7 @@
       <soap12:address location="/ws-v5"/>
     </wsdl:port>
   </wsdl:service>
-</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>oppslagstjeneste-ws-16-02.xsd</con:url><con:content><![CDATA[<xs:schema targetNamespace="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02" elementFormDefault="qualified" version="3.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:m="http://begrep.difi.no" xmlns:sawsdl="http://www.w3.org/ns/sawsdl" xmlns:tns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\C:\develop\sdp\kontaktregisteret-klient\SoapUI\oppslagstjeneste-ws-16-02.xsd</con:url><con:content><![CDATA[<xs:schema targetNamespace="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02" elementFormDefault="qualified" version="3.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:m="http://begrep.difi.no" xmlns:sawsdl="http://www.w3.org/ns/sawsdl" xmlns:tns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
   <xs:import namespace="http://begrep.difi.no" schemaLocation="oppslagstjeneste-metadata-16-02.xsd"/>
   <xs:annotation>
     <xs:appinfo>Oppslagstjenesten - Webtjeneste</xs:appinfo>
@@ -140,7 +146,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>oppslagstjeneste-metadata-16-02.xsd</con:url><con:content><![CDATA[<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://begrep.difi.no" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://begrep.difi.no">
+  <xs:element name="Oppslagstjenesten">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="PaaVegneAv" minOccurs="1" maxOccurs="1" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\develop\sdp\kontaktregisteret-klient\SoapUI\oppslagstjeneste-metadata-16-02.xsd</con:url><con:content><![CDATA[<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://begrep.difi.no" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://begrep.difi.no">
   <xs:annotation>
     <xs:appinfo>Metadata for Oppslagstjenesten</xs:appinfo>
     <xs:documentation xml:lang="nb">Definisjon av XML-typer benyttet i webtjeneste-grensesnitt.</xs:documentation>
@@ -239,45 +252,65 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v5</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="HentEndringer" bindingOperationName="HentEndringer" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="ForesporselEndringer" outgoingWss="out" incomingWss="in"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v5</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02">
-   <soap:Header/>
-   <soap:Body>
-      <ns:HentEndringerForespoersel fraEndringsNummer="0">
-         <!--1 or more repetitions:-->
-         <ns:informasjonsbehov>Kontaktinfo</ns:informasjonsbehov>
-      </ns:HentEndringerForespoersel>
-   </soap:Body>
-</soap:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02/oppslagstjeneste-16-02/HentEndringerRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="HentPersoner" bindingOperationName="HentPersoner" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="ForesporselMedPaaVegneAv" outgoingWss="out" incomingWss="in"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v5</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope" xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02">
-   <soap:Header>
-      <!-- Privat_leverandør (orgnr: 991825827) gjer oppslag på vegne av Offentlig_etat (orgnr: 991495304) -->
-      <ot:Oppslagstjenesten xmlns:ot="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02">
-         <ot:PaaVegneAv>991495304</ot:PaaVegneAv>
-      </ot:Oppslagstjenesten>
-   </soap:Header>
-   <soap:Body>
-      <ns:HentPersonerForespoersel>
-         <!--KVA INFORMASJONBEHOV EIN HAR-->
-         <!--****************************-->
-         <ns:informasjonsbehov>Kontaktinfo</ns:informasjonsbehov>
-         <ns:informasjonsbehov>VarslingsStatus</ns:informasjonsbehov>
-         <!--FØDSELSNUMMER EIN SKAL GJERE OPPSLAG PÅ (MAX 1000)-->
-         <!--**************************************************-->
-         <!--1. Oppdatet kontaktinfo 2012, "KAN_IKKE_VARSLES"-->
-         <ns:personidentifikator>23079400440</ns:personidentifikator>
-         <!--2. Oppdatet kontaktinfo 2015, "KAN_VARSLES"-->
-         <ns:personidentifikator>23079400602</ns:personidentifikator>
-         <!--3. Oppdatet kontaktinfo 2015 men slettet, "Status = SLETTET"-->
-         <ns:personidentifikator>23079400793</ns:personidentifikator>
-         <!--4. Oppdatet kontaktinfo 2015 men reservert, "KAN_IKKE_VARSLES"-->
-         <ns:personidentifikator>23079400874</ns:personidentifikator>
-      </ns:HentPersonerForespoersel>
-   </soap:Body>
-</soap:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02/oppslagstjeneste-16-02/HentPersonerRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="HentPrintSertifikat" bindingOperationName="HentPrintSertifikat" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="ForesporselSertifikat" outgoingWss="out" incomingWss="in"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v5</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02">
-   <soap:Header/>
-   <soap:Body>
-      <ns:HentPrintSertifikatForespoersel/>
-   </soap:Body>
-</soap:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02/oppslagstjeneste-16-02/HentPrintSertifikatRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer><con:crypto><con:source>C:/kildekode/JMETER_SAMLPER/kontaktregisteret-klient/SoapUI/kontaktinfo-client-test.jks</con:source><con:password>changeit</con:password><con:type>KEYSTORE</con:type><con:defaultAlias>buypass</con:defaultAlias><con:aliasPassword>changeit</con:aliasPassword></con:crypto><con:incoming><con:name>in</con:name><con:decryptCrypto>kontaktinfo-client-test.jks</con:decryptCrypto><con:signatureCrypto>kontaktinfo-client-test.jks</con:signatureCrypto><con:decryptPassword>changeit</con:decryptPassword></con:incoming><con:outgoing><con:name>out</con:name><con:password>changeit</con:password><con:entry type="Timestamp"><con:configuration><timeToLive>2000</timeToLive><strictTimestamp>true</strictTimestamp></con:configuration></con:entry><con:entry type="Signature" username="buypass" password="changeit"><con:configuration><crypto>kontaktinfo-client-test.jks</crypto><keyIdentifierType>3</keyIdentifierType><signatureAlgorithm>http://www.w3.org/2001/04/xmldsig-more#rsa-sha256</signatureAlgorithm><signatureCanonicalization>http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments</signatureCanonicalization><useSingleCert>false</useSingleCert><digestAlgorithm>http://www.w3.org/2001/04/xmlenc#sha256</digestAlgorithm><customTokenValueType/><customTokenId/><signaturePart>&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://eid-atest-web01.dmz.local/kontaktinfo-external/ws-v5</con:endpoint><con:endpoint>https://eid-atest-web01.dmz.local/kontaktinfo-external/ws-v5</con:endpoint></con:endpoints><con:operation id="51896e81-1a25-4b5f-9057-a3406fd7980a" isOneWay="false" action="" name="HentEndringer" bindingOperationName="HentEndringer" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5674838a-af48-4193-bc11-b26e1e895d6d" name="Request without PaaVegneAv" incomingWss="in" outgoingWss="out"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://eid-atest-web01.dmz.local/kontaktinfo-external/ws-v5</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <ns:HentEndringerForespoersel fraEndringsNummer="0">\r
+         <!--1 or more repetitions:-->\r
+         <ns:informasjonsbehov>Kontaktinfo</ns:informasjonsbehov>\r
+      </ns:HentEndringerForespoersel>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02/oppslagstjeneste-16-02/HentEndringerRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call id="19c9a30b-1c02-482b-8c0f-13ce14125532" name="Request with PaaVegneAv" outgoingWss="out with singed PaaVegneAv" incomingWss="in"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://eid-atest-web01.dmz.local/kontaktinfo-external/ws-v5</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02">\r
+   <soap:Header>\r
+      <ns:Oppslagstjenesten>\r
+         <ns:PaaVegneAv>991825827</ns:PaaVegneAv>\r
+      </ns:Oppslagstjenesten>\r
+   </soap:Header>\r
+   <soap:Body>\r
+      <ns:HentEndringerForespoersel fraEndringsNummer="0">\r
+         <!--1 or more repetitions:-->\r
+         <ns:informasjonsbehov>Kontaktinfo</ns:informasjonsbehov>\r
+      </ns:HentEndringerForespoersel>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02/oppslagstjeneste-16-02/HentEndringerRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="eba9058a-855f-43ef-986b-664a62e9dc48" isOneWay="false" action="" name="HentPersoner" bindingOperationName="HentPersoner" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="276441a3-b416-415e-81f8-42c84b1534b0" name="Request with PaaVegneAv" outgoingWss="out with singed PaaVegneAv" incomingWss="in"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://eid-atest-web01.dmz.local/kontaktinfo-external/ws-v5</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02">\r
+   <soap:Header>\r
+      <ns:Oppslagstjenesten>\r
+         <ns:PaaVegneAv>991825827</ns:PaaVegneAv>\r
+      </ns:Oppslagstjenesten>\r
+   </soap:Header>\r
+   <soap:Body>\r
+      <ns:HentPersonerForespoersel>\r
+         <!--1 or more repetitions:-->\r
+         <ns:informasjonsbehov>Kontaktinfo</ns:informasjonsbehov>\r
+         <!--1 to 1000 repetitions:-->\r
+         <ns:personidentifikator>23079421936</ns:personidentifikator>\r
+      </ns:HentPersonerForespoersel>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02/oppslagstjeneste-16-02/HentPersonerRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call id="d0174fd5-6530-4a9c-a7ab-0d02c8904389" name="Request without PaaVegneAv" outgoingWss="out" incomingWss="in"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://eid-atest-web01.dmz.local/kontaktinfo-external/ws-v5</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <ns:HentPersonerForespoersel>\r
+         <!--1 or more repetitions:-->\r
+         <ns:informasjonsbehov>Kontaktinfo</ns:informasjonsbehov>\r
+         <!--1 to 1000 repetitions:-->\r
+         <ns:personidentifikator>23079421936</ns:personidentifikator>\r
+      </ns:HentPersonerForespoersel>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02/oppslagstjeneste-16-02/HentPersonerRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="65f5e993-65b6-4f80-b2df-27c3929c310e" isOneWay="false" action="" name="HentPrintSertifikat" bindingOperationName="HentPrintSertifikat" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="8e174909-a106-4a11-9093-6e440ef8a00e" name="Request with PaaVegneAv" outgoingWss="out with singed PaaVegneAv" incomingWss="in"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://eid-atest-web01.dmz.local/kontaktinfo-external/ws-v5</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02">\r
+   <soap:Header>\r
+      <ns:Oppslagstjenesten>\r
+         <ns:PaaVegneAv>991825827</ns:PaaVegneAv>\r
+      </ns:Oppslagstjenesten>\r
+   </soap:Header>\r
+   <soap:Body>\r
+      <ns:HentPrintSertifikatForespoersel/>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02/oppslagstjeneste-16-02/HentPrintSertifikatRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call id="d58fbde1-7379-4849-92e5-f57975cdb4fd" name="Request without PaaVegneAv" outgoingWss="out" incomingWss="in"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://eid-atest-web01.dmz.local/kontaktinfo-external/ws-v5</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:ns="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <ns:HentPrintSertifikatForespoersel/>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://kontaktinfo.difi.no/wsdl/oppslagstjeneste-16-02/oppslagstjeneste-16-02/HentPrintSertifikatRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer><con:crypto><con:source>C:/develop/sdp/kontaktregisteret-klient/SoapUI/kontaktinfo-client-test.jks</con:source><con:password>changeit</con:password><con:type>KEYSTORE</con:type><con:defaultAlias>buypass</con:defaultAlias><con:aliasPassword>changeit</con:aliasPassword></con:crypto><con:incoming><con:name>in</con:name><con:decryptCrypto>kontaktinfo-client-test.jks</con:decryptCrypto><con:signatureCrypto>kontaktinfo-client-test.jks</con:signatureCrypto><con:decryptPassword>changeit</con:decryptPassword></con:incoming><con:outgoing><con:name>out</con:name><con:password>changeit</con:password><con:entry type="Timestamp"><con:configuration><timeToLive>2000</timeToLive><strictTimestamp>true</strictTimestamp></con:configuration></con:entry><con:entry type="Signature" username="buypass" password="changeit"><con:configuration><crypto>kontaktinfo-client-test.jks</crypto><keyIdentifierType>3</keyIdentifierType><signatureAlgorithm>http://www.w3.org/2001/04/xmldsig-more#rsa-sha256</signatureAlgorithm><signatureCanonicalization>http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments</signatureCanonicalization><useSingleCert>false</useSingleCert><digestAlgorithm>http://www.w3.org/2001/04/xmlenc#sha256</digestAlgorithm><customTokenValueType/><customTokenId/><signaturePart>&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
   &lt;con:entry key="id" value=""/>
   &lt;con:entry key="name" value="Timestamp"/>
   &lt;con:entry key="namespace" value="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"/>
@@ -285,4 +318,16 @@
   &lt;con:entry key="id" value=""/>
   &lt;con:entry key="name" value="Body"/>
   &lt;con:entry key="namespace" value="http://www.w3.org/2003/05/soap-envelope"/>
+&lt;/xml-fragment></signaturePart></con:configuration></con:entry></con:outgoing><con:outgoing><con:name>out with singed PaaVegneAv</con:name><con:password>changeit</con:password><con:entry type="Timestamp"><con:configuration><timeToLive>2000</timeToLive><strictTimestamp>true</strictTimestamp></con:configuration></con:entry><con:entry type="Signature" username="buypass"><con:configuration><crypto>kontaktinfo-client-test.jks</crypto><keyIdentifierType>3</keyIdentifierType><signatureAlgorithm>http://www.w3.org/2001/04/xmldsig-more#rsa-sha256</signatureAlgorithm><signatureCanonicalization>http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments</signatureCanonicalization><useSingleCert>false</useSingleCert><digestAlgorithm>http://www.w3.org/2001/04/xmlenc#sha256</digestAlgorithm><customTokenValueType/><customTokenId/><signaturePart>&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="id" value=""/>
+  &lt;con:entry key="name" value="Timestamp"/>
+  &lt;con:entry key="namespace" value="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"/>
+&lt;/xml-fragment></signaturePart><signaturePart>&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="id" value=""/>
+  &lt;con:entry key="name" value="Body"/>
+  &lt;con:entry key="namespace" value="http://www.w3.org/2003/05/soap-envelope"/>
+&lt;/xml-fragment></signaturePart><signaturePart>&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="id" value=""/>
+  &lt;con:entry key="name" value="Oppslagstjenesten"/>
+  &lt;con:entry key="namespace" value="http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02"/>
 &lt;/xml-fragment></signaturePart></con:configuration></con:entry></con:outgoing></con:wssContainer><con:oAuth2ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

@@ -35,6 +35,10 @@
         <wsdl:part name="HentPrintSertifikatRespons" element="ot16-02:HentPrintSertifikatRespons" />
     </wsdl:message>
 
+    <wsdl:message name="OppslagstjenestenHeader">
+        <wsdl:part name="Oppslagstjenesten" element="ot16-02:Oppslagstjenesten" />
+    </wsdl:message>
+
 	<wsdl:portType name="oppslagstjeneste-16-02">
 		<wsdl:operation name="HentEndringer">
 			<wsdl:input message="tns:HentEndringerForespoersel" />
@@ -58,6 +62,7 @@
         <wsdl:operation name="HentEndringer">
             <soap12:operation soapAction="" />
             <wsdl:input>
+                <soap12:header message="tns:OppslagstjenestenHeader" part="Oppslagstjenesten" use="literal" wsdl:required="false" />
                 <soap12:body use="literal" />
             </wsdl:input>
             <wsdl:output>
@@ -68,6 +73,7 @@
         <wsdl:operation name="HentPersoner">
             <soap12:operation soapAction="" />
             <wsdl:input>
+                <soap12:header message="tns:OppslagstjenestenHeader" part="Oppslagstjenesten" use="literal" wsdl:required="false" />
                 <soap12:body use="literal" />
             </wsdl:input>
             <wsdl:output>
@@ -78,6 +84,7 @@
         <wsdl:operation name="HentPrintSertifikat">
             <soap12:operation soapAction="" />
             <wsdl:input>
+                <soap12:header message="tns:OppslagstjenestenHeader" part="Oppslagstjenesten" use="literal" wsdl:required="false" />
                 <soap12:body use="literal" />
             </wsdl:input>
             <wsdl:output>
