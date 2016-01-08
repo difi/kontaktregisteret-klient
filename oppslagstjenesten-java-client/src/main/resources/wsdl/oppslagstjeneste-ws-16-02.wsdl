@@ -62,7 +62,7 @@
         <wsdl:operation name="HentEndringer">
             <soap12:operation soapAction="" />
             <wsdl:input>
-                <soap12:header message="tns:OppslagstjenestenHeader" part="Oppslagstjenesten" use="literal" wsdl:required="true" />
+                <soap12:header message="tns:OppslagstjenestenHeader" part="Oppslagstjenesten" use="literal" wsdl:required="false" />
                 <soap12:body use="literal" />
             </wsdl:input>
             <wsdl:output>
@@ -73,7 +73,7 @@
         <wsdl:operation name="HentPersoner">
             <soap12:operation soapAction="" />
             <wsdl:input>
-                <soap12:header message="tns:OppslagstjenestenHeader" part="Oppslagstjenesten" use="literal" wsdl:required="true" />
+                <soap12:header message="tns:OppslagstjenestenHeader" part="Oppslagstjenesten" use="literal" wsdl:required="false" />
                 <soap12:body use="literal" />
             </wsdl:input>
             <wsdl:output>
@@ -84,7 +84,7 @@
         <wsdl:operation name="HentPrintSertifikat">
             <soap12:operation soapAction="" />
             <wsdl:input>
-                <soap12:header message="tns:OppslagstjenestenHeader" part="Oppslagstjenesten" use="literal" wsdl:required="true" />
+                <soap12:header message="tns:OppslagstjenestenHeader" part="Oppslagstjenesten" use="literal" wsdl:required="false" />
                 <soap12:body use="literal" />
             </wsdl:input>
             <wsdl:output>
