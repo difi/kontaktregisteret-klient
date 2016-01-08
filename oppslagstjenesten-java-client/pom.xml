@@ -68,8 +68,13 @@
 							<wsdlOptions>
 								<wsdlOption>
                                     <wsdl>
-										${basedir}/src/test/resources/wsdl/oppslagstjeneste-ws-16-02.wsdl
+										${basedir}/src/main/resources/wsdl/oppslagstjeneste-ws-16-02.wsdl
 									</wsdl>
+									<extraargs>
+										<!-- Needed for include the header object as a valid parameter to the methods -->
+										<extraarg>-exsh</extraarg>
+										<extraarg>true</extraarg>
+									</extraargs>
 								</wsdlOption>
 							</wsdlOptions>
 						</configuration>

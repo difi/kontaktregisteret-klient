@@ -15,13 +15,8 @@ import java.util.Map;
  */
 public class WSS4JInterceptorHelper {
 
-
-    private static final WSS4JInInterceptor wss4JInInterceptor;
-    private static final WSS4JOutInterceptor wss4JOutInterceptor;
-
-    static {
+    private static WSS4JOutInterceptor getWss4JOutInterceptor(boolean signPaaVegneAv) {
         final Map<String, Object> outProps = new HashMap<String, Object>();
-        final Map<String, Object> inProps = new HashMap<String, Object>();
 
         // for outgoing messages: Signature and Timestamp validation
         outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE + " " + WSHandlerConstants.TIMESTAMP);
@@ -29,17 +24,28 @@ public class WSS4JInterceptorHelper {
         outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallbackHandler.class.getName());
         outProps.put(WSHandlerConstants.SIG_PROP_FILE, "client_sec.properties");
         outProps.put(WSHandlerConstants.SIG_KEY_ID, "X509KeyIdentifier");
-        outProps.put(WSHandlerConstants.SIGNATURE_PARTS, "{}{}Body;{}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp}");
+        if (signPaaVegneAv) {
+            outProps.put(WSHandlerConstants.SIGNATURE_PARTS, "{}{}Body;{}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp};{}{http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02}Oppslagstjenesten");
+        } else {
+            outProps.put(WSHandlerConstants.SIGNATURE_PARTS, "{}{}Body;{}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp}");
+        }
         outProps.put(WSHandlerConstants.SIG_ALGO, "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256");
+
+        return new WSS4JOutInterceptor(outProps);
+    }
+
+    private static WSS4JInInterceptor getWss4JInInterceptor() {
+
+        final Map<String, Object> inProps = new HashMap<String, Object>();
 
         // for incoming messages: Signature and Timestamp validation. Response is Encrypted
         inProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE + " " + WSHandlerConstants.TIMESTAMP + " " + WSHandlerConstants.ENCRYPT);
         inProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallbackHandler.class.getName());
         inProps.put(WSHandlerConstants.SIG_PROP_FILE, "server_sec.properties");
         inProps.put(WSHandlerConstants.DEC_PROP_FILE, "client_sec.properties");
-        
-        wss4JInInterceptor = new WSS4JInInterceptor(inProps);
-        wss4JOutInterceptor = new WSS4JOutInterceptor(outProps);
+
+        return new WSS4JInInterceptor(inProps);
+
     }
 
     /**
@@ -47,10 +53,10 @@ public class WSS4JInterceptorHelper {
      *
      * @param interceptorProvider the provider to configure.
      */
-    public static void addWSS4JInterceptors(InterceptorProvider interceptorProvider) {
-        interceptorProvider.getInInterceptors().add(wss4JInInterceptor);
+    public static void addWSS4JInterceptors(InterceptorProvider interceptorProvider, boolean signPaaVegneAv) {
+        interceptorProvider.getInInterceptors().add(getWss4JInInterceptor());
         interceptorProvider.getInInterceptors().add(new LoggingInInterceptor());
-        interceptorProvider.getOutInterceptors().add(wss4JOutInterceptor);
+        interceptorProvider.getOutInterceptors().add(getWss4JOutInterceptor(signPaaVegneAv));
         interceptorProvider.getOutInterceptors().add(new LoggingOutInterceptor());
     }
 }
