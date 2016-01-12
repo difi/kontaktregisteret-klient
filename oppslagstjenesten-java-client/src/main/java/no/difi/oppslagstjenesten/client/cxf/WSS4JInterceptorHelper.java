@@ -1,5 +1,6 @@
 package no.difi.oppslagstjenesten.client.cxf;
 
+import no.difi.oppslagstjenesten.client.performance.v5.ErrorLoggingInInterceptor;
 import org.apache.cxf.interceptor.InterceptorProvider;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
@@ -16,11 +17,15 @@ import java.util.Map;
 public class WSS4JInterceptorHelper {
 
     private static WSS4JOutInterceptor getWss4JOutInterceptor(boolean signPaaVegneAv) {
+        return getWss4JOutInterceptor(signPaaVegneAv, "client_alias");
+    }
+
+    private static WSS4JOutInterceptor getWss4JOutInterceptor(boolean signPaaVegneAv, String alias) {
         final Map<String, Object> outProps = new HashMap<String, Object>();
 
         // for outgoing messages: Signature and Timestamp validation
         outProps.put(WSHandlerConstants.ACTION, WSHandlerConstants.SIGNATURE + " " + WSHandlerConstants.TIMESTAMP);
-        outProps.put(WSHandlerConstants.USER, "client_alias");
+        outProps.put(WSHandlerConstants.USER, alias);
         outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallbackHandler.class.getName());
         outProps.put(WSHandlerConstants.SIG_PROP_FILE, "client_sec.properties");
         outProps.put(WSHandlerConstants.SIG_KEY_ID, "X509KeyIdentifier");
@@ -57,6 +62,21 @@ public class WSS4JInterceptorHelper {
         interceptorProvider.getInInterceptors().add(getWss4JInInterceptor());
         interceptorProvider.getInInterceptors().add(new LoggingInInterceptor());
         interceptorProvider.getOutInterceptors().add(getWss4JOutInterceptor(signPaaVegneAv));
+        interceptorProvider.getOutInterceptors().add(new LoggingOutInterceptor());
+    }
+
+
+    /**
+     * Adds the required WSS4J interceptors to the given provider. Useful for
+     *
+     * @param interceptorProvider the provider to configure.
+     * @param alias
+     */
+    public static void addWSS4JInterceptorsWithErrorLogger(InterceptorProvider interceptorProvider, boolean signPaaVegneAv, String alias) {
+        interceptorProvider.getInInterceptors().add(getWss4JInInterceptor());
+        interceptorProvider.getInInterceptors().add(new ErrorLoggingInInterceptor());
+//        interceptorProvider.getOutInterceptors().add(out);
+        interceptorProvider.getOutInterceptors().add(getWss4JOutInterceptor(signPaaVegneAv,alias));
         interceptorProvider.getOutInterceptors().add(new LoggingOutInterceptor());
     }
 }

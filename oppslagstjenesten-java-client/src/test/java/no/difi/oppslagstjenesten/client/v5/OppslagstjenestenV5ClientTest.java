@@ -1,36 +1,21 @@
 package no.difi.oppslagstjenesten.client.v5;
 
-import no.difi.oppslagstjenesten.client.cxf.WSS4JInterceptorHelper;
-
-
-
 import no.difi.kontaktinfo.wsdl.oppslagstjeneste_16_02.Oppslagstjeneste1602;
-
 import no.difi.kontaktinfo.xsd.oppslagstjeneste._16_02.*;
-import org.apache.cxf.configuration.jsse.TLSClientParameters;
+import no.difi.oppslagstjenesten.client.cxf.WSS4JInterceptorHelper;
+import no.difi.oppslagstjenesten.client.performance.v5.OppslagstjenestenKlient;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
-import org.apache.cxf.headers.Header;
-import org.apache.cxf.jaxb.JAXBDataBinding;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
-import org.apache.cxf.transport.http.HTTPConduit;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-import javax.xml.namespace.QName;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.security.cert.X509Certificate;
 import java.util.Arrays;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertNotNull;
-import static org.junit.Assert.*;
+//import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Sample client tests to demonstrate how to set up and use: Oppslagstjenesten for kontakt- og reservasjonsregisteret v5.
@@ -50,9 +35,9 @@ public class OppslagstjenestenV5ClientTest {
         // Optionally set system property "kontaktinfo.address.location" to override the default test endpoint
         String serviceAddress = System.getProperty("kontaktinfo.address.location");
         if (serviceAddress == null) {
-            //serviceAddress = "https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v5";
-            //serviceAddress = "http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v5/";
-           serviceAddress = "https://eid-atest-web01.dmz.local/kontaktinfo-external/ws-v5";
+            serviceAddress = "https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v5";
+//            serviceAddress = "http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v5/";
+//           serviceAddress = "https://eid-atest-web01.dmz.local/kontaktinfo-external/ws-v5";
         }
 
         // Enables running against alternative endpoints to the one specified in the WSDL
@@ -83,20 +68,7 @@ public class OppslagstjenestenV5ClientTest {
 
     private static void disableSslChecks(Oppslagstjeneste1602 oppslagstjenesten) {
         Client client = ClientProxy.getClient(oppslagstjenesten);
-        HTTPConduit httpConduit = (HTTPConduit) client.getConduit();
-        TLSClientParameters tlsClientParameters = new TLSClientParameters();
-        tlsClientParameters.setDisableCNCheck(true);
-        tlsClientParameters.setTrustManagers(new TrustManager[] { new X509TrustManager()  {
-            public X509Certificate[] getAcceptedIssuers() {
-                return new X509Certificate[0];
-            }
-
-            public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType) { }
-
-            public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType) { }
-
-        } });
-        httpConduit.setTlsClientParameters(tlsClientParameters);
+        OppslagstjenestenKlient.disableSslChecks(client);
     }
 
     @Test
