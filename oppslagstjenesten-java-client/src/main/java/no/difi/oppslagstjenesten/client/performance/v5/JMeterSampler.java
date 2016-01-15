@@ -8,6 +8,7 @@ import no.difi.kontaktinfo.wsdl.oppslagstjeneste_16_02.Oppslagstjeneste1602;
 import no.difi.kontaktinfo.xsd.oppslagstjeneste._16_02.HentPersonerForespoersel;
 import no.difi.kontaktinfo.xsd.oppslagstjeneste._16_02.HentPersonerRespons;
 import no.difi.kontaktinfo.xsd.oppslagstjeneste._16_02.Informasjonsbehov;
+import no.difi.kontaktinfo.xsd.oppslagstjeneste._16_02.Oppslagstjenesten;
 import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.protocol.java.sampler.AbstractJavaSamplerClient;
 import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
@@ -26,11 +27,13 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
     @Override
     public Arguments getDefaultParameters() {
         Arguments defaultParameters = new Arguments();
-//        defaultParameters.addArgument("Endpoint", "http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v5");
-        defaultParameters.addArgument("Endpoint", "https://kontaktinfo-ws-yt2.difi.eon.no/kontaktinfo-external/ws-v4");
-        defaultParameters.addArgument("Data", "[[\"12121212345\",\"0\",\"0\"]]");
-        defaultParameters.addArgument("informasjonsbehov", Informasjonsbehov.PERSON + ","+Informasjonsbehov.KONTAKTINFO+","+Informasjonsbehov.SERTIFIKAT);
+        defaultParameters.addArgument("Endpoint", "http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v5");
+//        defaultParameters.addArgument("Endpoint", "https://kontaktinfo-ws-yt2.difi.eon.no/kontaktinfo-external/ws-v4");
+//        defaultParameters.addArgument("Data", "[[\"12121212345\",\"0\",\"0\"]]");
+        defaultParameters.addArgument("Data", "[[\"23079419826\",\"0\",\"0\"]]");
+        defaultParameters.addArgument("informasjonsbehov", Informasjonsbehov.PERSON + "," + Informasjonsbehov.KONTAKTINFO + "," + Informasjonsbehov.SERTIFIKAT);
         defaultParameters.addArgument("alias", "client_alias");
+        defaultParameters.addArgument("paaVegneAv", "false");
 
         return defaultParameters;
     }
@@ -42,13 +45,23 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
         String behov = javaSamplerContext.getParameter("informasjonsbehov");
         String alias = javaSamplerContext.getParameter("alias");
 
+        boolean paaVegneAv = Boolean.TRUE.toString().equals(javaSamplerContext.getParameter("paaVegneAv"));
+
         final String inputData = String.format("%s,%s,%s,%s", endpoint, ssn, behov, alias);
         LOGGER.debug("called sampler " + inputData);
 
         SampleResult result = new SampleResult();
         try {
             OppslagstjenestenKlient oppslagstjenestenKlient = new OppslagstjenestenKlient(endpoint, alias);
-            Oppslagstjeneste1602 kontaktinfoPort = oppslagstjenestenKlient.getOppslagstjenstePort();
+            Oppslagstjeneste1602 kontaktinfoPort;
+            Oppslagstjenesten ot = null;
+            if(paaVegneAv){
+                kontaktinfoPort = oppslagstjenestenKlient.getOppslagstjenestenWithSigningPaaVegneAv();
+                ot = new Oppslagstjenesten();
+                ot.setPaaVegneAv("");
+            }else{
+                kontaktinfoPort = oppslagstjenestenKlient.getOppslagstjenstePort();
+            }
 
             HentPersonerForespoersel req = new HentPersonerForespoersel();
             setInformasjonsbehov(behov, req);
@@ -58,7 +71,7 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
             final Map<String, Object[]> map = mapSsnTilConfig(req, list);
 
 
-            HentPersonerRespons hentPersonerRespons = executeHentPersoner(ssn, behov, alias, result, kontaktinfoPort, req);
+            HentPersonerRespons hentPersonerRespons = executeHentPersoner(ssn, behov, alias, result, kontaktinfoPort, req, ot);
 
             if (hentPersonerRespons == null || hentPersonerRespons.getPerson() == null) {
                 result.setSuccessful(false);
@@ -67,7 +80,7 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
                 result.setSuccessful(false);
                 LOGGER.error("request map size is not equal to response size: " + map.size() + " vs " + hentPersonerRespons.getPerson().size());
             } else {
-                if(LOGGER.isDebugEnabled()) {
+                if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug("valider respons: " + personToString(hentPersonerRespons));
                 }
                 validerRespons(result, map, hentPersonerRespons);
@@ -107,12 +120,12 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
         }
     }
 
-    private HentPersonerRespons executeHentPersoner(String ssn, String behov, String alias, SampleResult result, Oppslagstjeneste1602 kontaktinfoPort, HentPersonerForespoersel req) {
+    private HentPersonerRespons executeHentPersoner(String ssn, String behov, String alias, SampleResult result, Oppslagstjeneste1602 kontaktinfoPort, HentPersonerForespoersel req, Oppslagstjenesten ot) {
         HentPersonerRespons hentPersonerRespons;
         try {
             result.setSamplerData(alias + "@" + behov + ": " + ssn);
             result.sampleStart();
-            hentPersonerRespons = kontaktinfoPort.hentPersoner(req, null);
+            hentPersonerRespons = kontaktinfoPort.hentPersoner(req, ot);
         } finally {
             result.sampleEnd();
         }
@@ -123,9 +136,9 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
         for (Person p : hentPersonerRespons.getPerson()) {
             boolean havePostkasse = map.get(p.getPersonidentifikator())[2].equals("1");
             LOGGER.debug(p.getPersonidentifikator());
-            if(p.getKontaktinformasjon() == null || p.getKontaktinformasjon().getEpostadresse() == null  ){
+            if (p.getKontaktinformasjon() == null || p.getKontaktinformasjon().getEpostadresse() == null) {
                 result.setSuccessful(false);
-                LOGGER.error("Kontaktinformasjon is empty or epostadresse is empty for ssn="+p.getPersonidentifikator()+". User is probably not in the KKR database.");
+                LOGGER.error("Kontaktinformasjon is empty or epostadresse is empty for ssn=" + p.getPersonidentifikator() + ". User is probably not in the KKR database.");
             } else if (!p.getKontaktinformasjon().getEpostadresse().getValue().contains(p.getPersonidentifikator())) {
                 result.setSuccessful(false);
                 LOGGER.error("Epostadresse does not contain SSN: " + (p.getSikkerDigitalPostAdresse() != null ? p.getSikkerDigitalPostAdresse().toString() : null));
@@ -145,23 +158,23 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
         }
     }
 
-    private String personToString(HentPersonerRespons hentPersonerRespons){
-        if(hentPersonerRespons == null || hentPersonerRespons.getPerson() == null){
+    private String personToString(HentPersonerRespons hentPersonerRespons) {
+        if (hentPersonerRespons == null || hentPersonerRespons.getPerson() == null) {
             return null;
         }
         String personar = "";
-        for (Person person : hentPersonerRespons.getPerson()){
-            personar+= "Person:["+person.getPersonidentifikator() +", "+ kontaktinfoToString(person.getKontaktinformasjon()) + "]\n";
+        for (Person person : hentPersonerRespons.getPerson()) {
+            personar += "Person:[" + person.getPersonidentifikator() + ", " + kontaktinfoToString(person.getKontaktinformasjon()) + "]\n";
         }
         return personar;
 
     }
 
-    private String kontaktinfoToString(Kontaktinformasjon kontaktinformasjon){
-        if(kontaktinformasjon == null){
+    private String kontaktinfoToString(Kontaktinformasjon kontaktinformasjon) {
+        if (kontaktinformasjon == null) {
             return null;
         }
 
-        return "," + kontaktinformasjon.getEpostadresse()!=null?kontaktinformasjon.getEpostadresse().getValue():null + "," + kontaktinformasjon.getMobiltelefonnummer()!=null?kontaktinformasjon.getMobiltelefonnummer().getValue():null;
+        return "," + kontaktinformasjon.getEpostadresse() != null ? kontaktinformasjon.getEpostadresse().getValue() : null + "," + kontaktinformasjon.getMobiltelefonnummer() != null ? kontaktinformasjon.getMobiltelefonnummer().getValue() : null;
     }
 }

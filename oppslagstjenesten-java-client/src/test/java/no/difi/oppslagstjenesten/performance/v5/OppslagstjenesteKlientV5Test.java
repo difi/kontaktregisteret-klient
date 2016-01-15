@@ -22,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 public class OppslagstjenesteKlientV5Test {
 
     private static Oppslagstjeneste1602 kontaktinfoPort;
+    private static Oppslagstjeneste1602 kontaktinfoPortPaaVegneAv;
 
     private static final String TEST_SSN_1 = "02018090573";
     private static final String TEST_SSN_2 = "02018090301";
@@ -32,15 +33,19 @@ public class OppslagstjenesteKlientV5Test {
         // Optionally set system property "kontaktinfo.address.location" to override the default test endpoint
         String serviceAddress = System.getProperty("kontaktinfo.address.location");
         if (serviceAddress == null) {
-        	serviceAddress = "https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v4";
+//        	serviceAddress = "https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v4";
 //            serviceAddress = "https://eid-systest-web01.dmz.local/kontaktinfo-external/ws-v4";
 //            serviceAddress = "http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v4";
 //        	serviceAddress = "https://kontaktinfo-ws-test1.difi.eon.no/kontaktinfo-external/ws-v4";
-//            serviceAddress = "https://eid-atest-web01.dmz.local/kontaktinfo-external/ws-v5";
+            serviceAddress = "https://eid-atest-web01.dmz.local/kontaktinfo-external/ws-v5";
         }
 
         OppslagstjenestenKlient oppslagstjenestenKlient = new OppslagstjenestenKlient(serviceAddress, "client_alias");
         kontaktinfoPort = oppslagstjenestenKlient.getOppslagstjenstePort();
+        kontaktinfoPortPaaVegneAv = oppslagstjenestenKlient.getOppslagstjenestenWithSigningPaaVegneAv();
+
+//        OppslagstjenestenKlient oppslagstjenestenKlientPaaVegneAv = new OppslagstjenestenKlient(serviceAddress, "client_alias", true);
+//        kontaktinfoPortPaaVegneAv = oppslagstjenestenKlientPaaVegneAv.getOppslagstjenstePort();
 
         // Optionally set system property "kontaktinfo.ssl.disable" to disable SSL checks to enable running tests against endpoint with invalid SSL setup
         String disableSslChecks = System.getProperty("kontaktinfo.ssl.disable");
@@ -70,6 +75,21 @@ public class OppslagstjenesteKlientV5Test {
         personas.getInformasjonsbehov().add(Informasjonsbehov.KONTAKTINFO);
         personas.getPersonidentifikator().addAll(Arrays.asList(TEST_SSN_1, TEST_SSN_2));
         HentPersonerRespons personasResponse = kontaktinfoPort.hentPersoner(personas, null);
+        assertNotNull(personasResponse);
+        assertEquals(TEST_SSN_1, personasResponse.getPerson().get(0).getPersonidentifikator());
+        assertEquals(TEST_SSN_2, personasResponse.getPerson().get(1).getPersonidentifikator());
+    }
+
+    @Test
+    public void testHentKontaktinfoMedPaaVegneAv() {
+
+        Oppslagstjenesten ot = new Oppslagstjenesten();
+        ot.setPaaVegneAv("991825827");
+
+        HentPersonerForespoersel personas = new HentPersonerForespoersel();
+        personas.getInformasjonsbehov().add(Informasjonsbehov.KONTAKTINFO);
+        personas.getPersonidentifikator().addAll(Arrays.asList(TEST_SSN_1, TEST_SSN_2));
+        HentPersonerRespons personasResponse = kontaktinfoPortPaaVegneAv.hentPersoner(personas, ot);
         assertNotNull(personasResponse);
         assertEquals(TEST_SSN_1, personasResponse.getPerson().get(0).getPersonidentifikator());
         assertEquals(TEST_SSN_2, personasResponse.getPerson().get(1).getPersonidentifikator());

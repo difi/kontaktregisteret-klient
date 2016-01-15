@@ -17,7 +17,7 @@ public class OppslagstjenestenKlient {
     private Oppslagstjeneste1602 oppslagstjenstePort;
     private Oppslagstjeneste1602 oppslagstjenestenWithSigningPaaVegneAv;
 
-    public OppslagstjenestenKlient(String url, String alias, boolean signPaaVegneAv) {
+    public OppslagstjenestenKlient(String url, String alias) {
 
         JaxWsProxyFactoryBean jaxWsProxyFactoryBean = new JaxWsProxyFactoryBean();
         jaxWsProxyFactoryBean.setServiceClass(Oppslagstjeneste1602.class);
@@ -25,7 +25,7 @@ public class OppslagstjenestenKlient {
         jaxWsProxyFactoryBean.setBindingId(javax.xml.ws.soap.SOAPBinding.SOAP12HTTP_BINDING);
 
         // Configures WS-Security
-        WSS4JInterceptorHelper.addWSS4JInterceptorsWithErrorLogger(jaxWsProxyFactoryBean, signPaaVegneAv, alias);
+        WSS4JInterceptorHelper.addWSS4JInterceptorsWithErrorLogger(jaxWsProxyFactoryBean, false, alias);
         oppslagstjenstePort = (Oppslagstjeneste1602) jaxWsProxyFactoryBean.create();
 
         // Make a new instance of Oppslagstjenesten client with signing of PaaVegneAv header element
@@ -37,10 +37,6 @@ public class OppslagstjenestenKlient {
 
         disableSSL(oppslagstjenstePort, oppslagstjenestenWithSigningPaaVegneAv);
 
-    }
-
-    public OppslagstjenestenKlient(String url, String alias) {
-        this(url, alias, false);
     }
 
     private void disableSSL(Object kontaktinfoPort, Object oppslagstjenestenWithSigningPaaVegneAv) {
