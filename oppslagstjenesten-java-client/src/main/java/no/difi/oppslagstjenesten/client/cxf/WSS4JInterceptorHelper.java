@@ -23,7 +23,7 @@ public class WSS4JInterceptorHelper {
         outProps.put(WSHandlerConstants.USER, "client_alias");
         outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientKeystorePasswordCallbackHandler.class.getName());
         outProps.put(WSHandlerConstants.SIG_PROP_FILE, "client_sec.properties");
-        outProps.put(WSHandlerConstants.SIG_KEY_ID, "X509KeyIdentifier");
+        outProps.put(WSHandlerConstants.SIG_KEY_ID, "DirectReference"); // Using "X509KeyIdentifier" is also supported by oppslagstjenesten
         if (signPaaVegneAv) {
             outProps.put(WSHandlerConstants.SIGNATURE_PARTS, "{}{}Body;{}{http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd}Timestamp};{}{http://kontaktinfo.difi.no/xsd/oppslagstjeneste/16-02}Oppslagstjenesten");
         } else {

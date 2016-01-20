@@ -55,21 +55,8 @@ public class OppslagstjenestenV5ClientTest {
            serviceAddress = "https://eid-atest-web01.dmz.local/kontaktinfo-external/ws-v5";
         }
 
-        // Enables running against alternative endpoints to the one specified in the WSDL
-        JaxWsProxyFactoryBean jaxWsProxyFactoryBean = new JaxWsProxyFactoryBean();
-        jaxWsProxyFactoryBean.setServiceClass(Oppslagstjeneste1602.class);
-        jaxWsProxyFactoryBean.setAddress(serviceAddress);
-        jaxWsProxyFactoryBean.setBindingId(javax.xml.ws.soap.SOAPBinding.SOAP12HTTP_BINDING);
-
-        // Configures WS-Security
-        WSS4JInterceptorHelper.addWSS4JInterceptors(jaxWsProxyFactoryBean, false);
-        oppslagstjenesten = (Oppslagstjeneste1602) jaxWsProxyFactoryBean.create();
-
-        // Make a new instance of Oppslagstjenesten client with signing of PaaVegneAv header element
-        jaxWsProxyFactoryBean.getInInterceptors().clear();
-        jaxWsProxyFactoryBean.getOutInterceptors().clear();
-        WSS4JInterceptorHelper.addWSS4JInterceptors(jaxWsProxyFactoryBean, true);
-        oppslagstjenestenWithSigningPaaVegneAv = (Oppslagstjeneste1602) jaxWsProxyFactoryBean.create();
+        oppslagstjenesten = getOppslagstjenestePort(serviceAddress, false);
+        oppslagstjenestenWithSigningPaaVegneAv = getOppslagstjenestePort(serviceAddress, true);
 
         // Optionally set system property "kontaktinfo.ssl.disable" to disable SSL checks to enable running tests against endpoint with invalid SSL setup
         String disableSslChecks = System.getProperty("kontaktinfo.ssl.disable");
@@ -79,6 +66,16 @@ public class OppslagstjenestenV5ClientTest {
             disableSslChecks(oppslagstjenestenWithSigningPaaVegneAv);
             System.setProperty("com.sun.net.ssl.checkRevocation", "false");
         }
+    }
+
+    private static Oppslagstjeneste1602 getOppslagstjenestePort(String serviceAddress, boolean usePaaVegneAv ) {
+        JaxWsProxyFactoryBean jaxWsProxyFactoryBean = new JaxWsProxyFactoryBean();
+        jaxWsProxyFactoryBean.setServiceClass(Oppslagstjeneste1602.class);
+        jaxWsProxyFactoryBean.setAddress(serviceAddress);
+        jaxWsProxyFactoryBean.setBindingId(javax.xml.ws.soap.SOAPBinding.SOAP12HTTP_BINDING);
+        WSS4JInterceptorHelper.addWSS4JInterceptors(jaxWsProxyFactoryBean, usePaaVegneAv);
+
+        return (Oppslagstjeneste1602) jaxWsProxyFactoryBean.create();
     }
 
     private static void disableSslChecks(Oppslagstjeneste1602 oppslagstjenesten) {
@@ -141,5 +138,4 @@ public class OppslagstjenestenV5ClientTest {
         assertNotNull(endringerRepsons);
 
     }
-
 }
