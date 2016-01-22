@@ -33,10 +33,10 @@ public class OppslagstjenesteKlientV5Test {
         // Optionally set system property "kontaktinfo.address.location" to override the default test endpoint
         String serviceAddress = System.getProperty("kontaktinfo.address.location");
         if (serviceAddress == null) {
-//        	serviceAddress = "https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v4";
-//            serviceAddress = "https://eid-systest-web01.dmz.local/kontaktinfo-external/ws-v4";
-//            serviceAddress = "http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v4";
-//        	serviceAddress = "https://kontaktinfo-ws-test1.difi.eon.no/kontaktinfo-external/ws-v4";
+//        	serviceAddress = "https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v5";
+//            serviceAddress = "https://eid-systest-web01.dmz.local/kontaktinfo-external/ws-v5";
+            serviceAddress = "http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v5";
+        	serviceAddress = "https://kontaktinfo-ws-test1.difi.eon.no/kontaktinfo-external/ws-v5";
             serviceAddress = "https://eid-atest-web01.dmz.local/kontaktinfo-external/ws-v5";
         }
 

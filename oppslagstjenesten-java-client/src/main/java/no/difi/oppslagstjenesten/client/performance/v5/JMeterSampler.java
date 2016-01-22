@@ -2,6 +2,7 @@ package no.difi.oppslagstjenesten.client.performance.v5;
 
 
 import com.cedarsoftware.util.io.JsonReader;
+import jodd.util.StringUtil;
 import no.difi.begrep.Kontaktinformasjon;
 import no.difi.begrep.Person;
 import no.difi.kontaktinfo.wsdl.oppslagstjeneste_16_02.Oppslagstjeneste1602;
@@ -17,6 +18,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -27,10 +29,10 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
     @Override
     public Arguments getDefaultParameters() {
         Arguments defaultParameters = new Arguments();
-        defaultParameters.addArgument("Endpoint", "http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v5");
-//        defaultParameters.addArgument("Endpoint", "https://kontaktinfo-ws-yt2.difi.eon.no/kontaktinfo-external/ws-v4");
-//        defaultParameters.addArgument("Data", "[[\"12121212345\",\"0\",\"0\"]]");
-        defaultParameters.addArgument("Data", "[[\"23079419826\",\"0\",\"0\"]]");
+//        defaultParameters.addArgument("Endpoint", "http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v5");
+        defaultParameters.addArgument("Endpoint", "https://kontaktinfo-ws-yt2.difi.eon.no/kontaktinfo-external/ws-v5");
+        defaultParameters.addArgument("Data", "[[\"12121212345\",\"0\",\"0\"]]");
+//        defaultParameters.addArgument("Data", "[[\"23079419826\",\"0\",\"0\"]]");
         defaultParameters.addArgument("informasjonsbehov", Informasjonsbehov.PERSON + "," + Informasjonsbehov.KONTAKTINFO + "," + Informasjonsbehov.SERTIFIKAT);
         defaultParameters.addArgument("alias", "client_alias");
         defaultParameters.addArgument("paaVegneAv", "false");
@@ -83,7 +85,7 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug("valider respons: " + personToString(hentPersonerRespons));
                 }
-                validerRespons(result, map, hentPersonerRespons);
+                validerRespons(result, map, hentPersonerRespons, req.getInformasjonsbehov());
             }
 
         } catch (Exception e) {
@@ -132,29 +134,51 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
         return hentPersonerRespons;
     }
 
-    private void validerRespons(SampleResult result, Map<String, Object[]> map, HentPersonerRespons hentPersonerRespons) {
+    private void validerRespons(SampleResult result, Map<String, Object[]> map, HentPersonerRespons hentPersonerRespons, List<Informasjonsbehov> informasjonsbehov) {
         for (Person p : hentPersonerRespons.getPerson()) {
             boolean havePostkasse = map.get(p.getPersonidentifikator())[2].equals("1");
             LOGGER.debug(p.getPersonidentifikator());
-            if (p.getKontaktinformasjon() == null || p.getKontaktinformasjon().getEpostadresse() == null) {
-                result.setSuccessful(false);
-                LOGGER.error("Kontaktinformasjon is empty or epostadresse is empty for ssn=" + p.getPersonidentifikator() + ". User is probably not in the KKR database.");
-            } else if (!p.getKontaktinformasjon().getEpostadresse().getValue().contains(p.getPersonidentifikator())) {
-                result.setSuccessful(false);
-                LOGGER.error("Epostadresse does not contain SSN: " + (p.getSikkerDigitalPostAdresse() != null ? p.getSikkerDigitalPostAdresse().toString() : null));
-            }
-            if (havePostkasse) {
-                result.setSuccessful(p.getSikkerDigitalPostAdresse() != null);
-            } else {
-                result.setSuccessful(p.getSikkerDigitalPostAdresse() == null);
-            }
 
-            if (result.isSuccessful()) {
-                result.setResponseMessage(p.getKontaktinformasjon().getEpostadresse().getValue());
-                result.setSuccessful(true);
-            }
+           if(informasjonsbehov.contains(Informasjonsbehov.VARSLINGS_STATUS)){
+               validateVarslingsstatus(result, p);
+           }else {
+               validateKontaktinformasjon(result, p);
+               validatePostkasse(result, p, havePostkasse);
 
+               if (result.isSuccessful()) {
+                   result.setResponseMessage(p.getKontaktinformasjon().getEpostadresse().getValue());
+                   result.setSuccessful(true);
+               }
 
+           }
+        }
+    }
+
+    private void validatePostkasse(SampleResult result, Person p, boolean havePostkasse) {
+        if (havePostkasse) {
+            result.setSuccessful(p.getSikkerDigitalPostAdresse() != null);
+        } else {
+            result.setSuccessful(p.getSikkerDigitalPostAdresse() == null);
+        }
+    }
+
+    private void validateKontaktinformasjon(SampleResult result, Person p) {
+        if (p.getKontaktinformasjon() == null || p.getKontaktinformasjon().getEpostadresse() == null) {
+            result.setSuccessful(false);
+            LOGGER.error("Kontaktinformasjon is empty or epostadresse is empty for ssn=" + p.getPersonidentifikator() + ". User is probably not in the KKR database.");
+        } else if (!p.getKontaktinformasjon().getEpostadresse().getValue().contains(p.getPersonidentifikator())) {
+            result.setSuccessful(false);
+            LOGGER.error("Epostadresse does not contain SSN: " + (p.getSikkerDigitalPostAdresse() != null ? p.getSikkerDigitalPostAdresse().toString() : null));
+        }
+    }
+
+    private void validateVarslingsstatus(SampleResult result, Person p) {
+        if(p.getVarslingsstatus() != null && p.getVarslingsstatus().value() != null){
+            result.setResponseMessage(p.getVarslingsstatus().value());
+            result.setSuccessful(true);
+        }else{
+            result.setSuccessful(false);
+            LOGGER.error("Has informasjonsbehov VARSLINGS_STATUS, but missing varslingsstatus in reponse: SSN:" + p.getPersonidentifikator());
         }
     }
 
