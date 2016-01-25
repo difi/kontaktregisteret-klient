@@ -139,6 +139,7 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
             boolean havePostkasse = map.get(p.getPersonidentifikator())[2].equals("1");
             LOGGER.debug(p.getPersonidentifikator());
 
+            result.setSuccessful(true);
            if(informasjonsbehov.contains(Informasjonsbehov.VARSLINGS_STATUS)){
                validateVarslingsstatus(result, p);
            }else {
@@ -155,10 +156,10 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
     }
 
     private void validatePostkasse(SampleResult result, Person p, boolean havePostkasse) {
-        if (havePostkasse) {
-            result.setSuccessful(p.getSikkerDigitalPostAdresse() != null);
-        } else {
-            result.setSuccessful(p.getSikkerDigitalPostAdresse() == null);
+        if (havePostkasse && p.getSikkerDigitalPostAdresse() == null) {
+            result.setSuccessful(false);
+        } else if(!havePostkasse && p.getSikkerDigitalPostAdresse() != null) {
+            result.setSuccessful(false);
         }
     }
 
@@ -173,12 +174,11 @@ public class JMeterSampler extends AbstractJavaSamplerClient implements Serializ
     }
 
     private void validateVarslingsstatus(SampleResult result, Person p) {
-        if(p.getVarslingsstatus() != null && p.getVarslingsstatus().value() != null){
-            result.setResponseMessage(p.getVarslingsstatus().value());
-            result.setSuccessful(true);
-        }else{
+        if(p.getVarslingsstatus() == null || p.getVarslingsstatus().value() == null){
             result.setSuccessful(false);
             LOGGER.error("Has informasjonsbehov VARSLINGS_STATUS, but missing varslingsstatus in reponse: SSN:" + p.getPersonidentifikator());
+        }else{
+            result.setResponseMessage(p.getVarslingsstatus().value());
         }
     }
 
