@@ -11,8 +11,8 @@ Husk å restarte soap ui etter insallasjonen av JCE.
 
 
 Kjente problemer
-==
+===
 
-Det er et kjent problem at dette prosjektet ikke fungerer med nyere versjoner av SoapUI. 
+Det er et kjent problem at dette prosjektet ikke fungerer med versjoner av SoapUI 5.x på grunn av feilen beskrevet på http://community.smartbear.com/t5/SoapUI-NG/SoapUI-4-5-difference-Getting-Error-getting-response-NULL/td-p/41816
 
-Prosjektet skal fungere fint med versjon 4.5.1, som kan lastes ned fra: http://sourceforge.net/projects/soapui/files/soapui/4.5.1/
+Prosjektet skal fungere fint med versjon 4.5.1, som kan lastes ned fra: https://www.soapui.org/downloads/soapui/soapui-os-older-versions.html
