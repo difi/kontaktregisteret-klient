@@ -15,7 +15,6 @@ h3. Forløpig er følgende tilgjengelig:
 
 - Java-eksempelklient for Oppslagstjenesten
 - SoapUI prosjekt for test av Oppslagstjenesten
-- Java-kode for dekryptering av filer for Oppslagstjenesten eksport
 
 h2. .Net klientbibliotek
 
