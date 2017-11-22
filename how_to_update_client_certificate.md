@@ -1,10 +1,8 @@
 ## How to update client certificate (virksomhetssertifikat) in the oppslagstjenesten java-example code. 
 
-1. Add your new keypair to the keystore found in src\main\resources\certs\kontaktinfo-client-test.jks . Use 'changeit' as key password. Remember the alias you choosed to use.
+1. Add your new keypair to the keystore found in src\main\resources\certs\kontaktinfo-client-test.jks . Use 'changeit' as key password (You can use another password, but then you need to update the class no.difi.oppslagstjenesten.client.cxf.ClientKeystorePasswordCallbackHandler.java to provide the right password) Remember the alias you choosed to use.
 
 2. Edit the properties file client_sec.properties found in src\main\resources. Update the property 'org.apache.ws.security.crypto.merlin.keystore.alias' to match the alias of your new keys.
-
-3. Update the property 
 
 If you have used a proper test 'virksomhetssertifikat'-certificate (i.e. from Buypass TEST4 cert-chain) and your organization has been granted access to the ver1 environment of the service, the example code test should now run without failure.
 
