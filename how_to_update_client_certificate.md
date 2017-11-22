@@ -25,4 +25,4 @@ If you have used a proper test 'virksomhetssertifikat'-certificate (i.e. from Bu
 
 8. Repeat step 5-7 for the 'out with signed PaaVegneAv'-configuration
 
-9. Close the project-properties window. You should now be able to run all tests. If a request fails make sure that the correct outgoing WSS configuration is choosen for the request. (Check 'Aut' in the lower left-corner of the request window). The logs avaiable on the bottom of the soapui-gui can also give helpful information.
+9. Close the project-properties window. You should now be able to run all tests. If a request fails make sure that the correct outgoing WSS configuration is choosen for the request. (Check 'Aut' in the lower left-corner of the request window). The logs available on the bottom of the soapui-gui can also give helpful information.
