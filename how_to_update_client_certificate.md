@@ -13,7 +13,7 @@ If you have used a proper test 'virksomhetssertifikat'-certificate (i.e. from Bu
 
 2. Load the project in SoapUI. Double-click on the 'oppslagstjeneste-ws-16-02' project element i the projects list and choose the 'WS-Security configurations' tab.
 
-3. First check that the keystore is loaded properly. Choose the 'keystores' tab And check that the keystore 'kontaktinfo-client-test.jks' has status 'OK'. If not check that the correct path is given for the project. Try to remove it and add it once more. Password is 'changeit', 'Default Alias' is the alias of your new keypair and 'Alias password' is corresponding password.
+3. First check that the keystore is loaded properly. Choose the 'keystores' tab and check that the keystore 'kontaktinfo-client-test.jks' has status 'OK'. If not check that the correct path is given for the keystore. Try to remove it and add it once more. Keystore password is 'changeit', 'Default Alias' is the alias of your new keypair and 'Alias password' is the corresponding password.
 
 4. Go to the 'Outgoing WS-Security Configurations' tab and chooose the configuration named 'out'
 
@@ -25,4 +25,4 @@ If you have used a proper test 'virksomhetssertifikat'-certificate (i.e. from Bu
 
 8. Repeat step 5-7 for the 'out with signed PaaVegneAv'-configuration
 
-9. Close the project-propeties window. You should now be able to run all tests. If problems make sure that the correct outgoing WSS configuration is choosen for the request. (Check 'Aut' in the lower left-corner of the request window)
+9. Close the project-properties window. You should now be able to run all tests. If a request fails make sure that the correct outgoing WSS configuration is choosen for the request. (Check 'Aut' in the lower left-corner of the request window). The logs avaiable on the bottom of the soapui-gui can also give helpful information.
