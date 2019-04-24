@@ -35,9 +35,8 @@ public class OppslagstjenestenV5ClientTest {
         // Optionally set system property "kontaktinfo.address.location" to override the default test endpoint
         String serviceAddress = System.getProperty("kontaktinfo.address.location");
         if (serviceAddress == null) {
-//            serviceAddress = "https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v5";
-            serviceAddress = "http://eid-vag-admin.difi.local:10002/kontaktinfo-external/ws-v5/";
-//           serviceAddress = "https://eid-atest-web01.dmz.local/kontaktinfo-external/ws-v5";
+            serviceAddress = "https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v5"
+            //serviceAddress = "https://kontaktinfo-ws-ver1.difi.no/kontaktinfo-external/ws-v5";
         }
 
         oppslagstjenesten = getOppslagstjenestePort(serviceAddress, false);
@@ -102,12 +101,12 @@ public class OppslagstjenestenV5ClientTest {
         Oppslagstjenesten ot = new Oppslagstjenesten();
         ot.setPaaVegneAv("991825827");
 
-        HentEndringerForespoersel endringer = new HentEndringerForespoersel();
-        endringer.getInformasjonsbehov().add(Informasjonsbehov.KONTAKTINFO);
-        endringer.setFraEndringsNummer(0);
+		HentPersonerForespoersel personas = new HentPersonerForespoersel();
+        personas.getInformasjonsbehov().add(Informasjonsbehov.KONTAKTINFO);
+        personas.getPersonidentifikator().addAll(Arrays.asList(TEST_SSN_1, TEST_SSN_2));
 
-        HentEndringerRespons endringerRepsons = oppslagstjenestenWithSigningPaaVegneAv.hentEndringer(endringer, ot);
-        assertNotNull(endringerRepsons);
-
+        HentPersonerRespons personasResponse = oppslagstjenestenWithSigningPaaVegneAv.hentPersoner(personas, ot);
+		assertEquals(TEST_SSN_1, personasResponse.getPerson().get(0).getPersonidentifikator());
+        assertEquals(TEST_SSN_2, personasResponse.getPerson().get(1).getPersonidentifikator());
     }
 }
