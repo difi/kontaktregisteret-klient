@@ -35,7 +35,7 @@ public class OppslagstjenestenV5ClientTest {
         // Optionally set system property "kontaktinfo.address.location" to override the default test endpoint
         String serviceAddress = System.getProperty("kontaktinfo.address.location");
         if (serviceAddress == null) {
-            serviceAddress = "https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v5"
+            serviceAddress = "https://kontaktinfo-ws-ver2.difi.no/kontaktinfo-external/ws-v5";
             //serviceAddress = "https://kontaktinfo-ws-ver1.difi.no/kontaktinfo-external/ws-v5";
         }
 
