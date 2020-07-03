@@ -47,6 +47,10 @@ public class OppslagstjenestenV5ClientTest {
 
     @BeforeClass
     public static void beforeClass() {
+
+        System.setProperty("javax.xml.soap.SAAJMetaFactory", "com.sun.xml.messaging.saaj.soap.SAAJMetaFactoryImpl");
+
+
         // Optionally set system property "kontaktinfo.address.location" to override the default test endpoint
         String serviceAddress = System.getProperty("kontaktinfo.address.location");
         if (serviceAddress == null) {
